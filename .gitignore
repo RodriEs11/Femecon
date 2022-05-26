@@ -1,0 +1,30 @@
+################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/ChromeDriver/bin/Debug
+/ChromeDriver/obj/Debug
+/Data/bin/Debug
+/Data/obj/Debug
+/Femecon_2_0/bin
+/Femecon_2_0/obj
+/Femecon_2_0/packages
+/ProgresoAutorizacion/bin/Debug
+/ProgresoAutorizacion/obj/Debug
+/RELEASES FINALES/Femecon 2.0.0
+/Updater/obj
+/Updater/bin
+/Updater_installer/bin
+/Updater_installer/obj/Debug
+/Femecon_2_0/.vs/Femecon/v16
+/Femecon/obj/Debug
+/Femecon/bin/Debug
+/Femecon/.vs/Femecon/v16
+/Femecon/libs/Credenciales.cs
+/Updater_installer/obj/Release
+/Femecon/obj/Release
+/Data/obj/Release
+/ChromeDriver/obj/Release
+/Femecon/packages
+/libs/obj
+/libs
