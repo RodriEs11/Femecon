@@ -21,8 +21,8 @@ public class ChromeDriverUpdater
         {
             killProcessChromeDriver();
             deleteChromeDriver();
-            //downloadLastChromeDriver();
-            downloadSameVersionInstalledChromeDriver();
+            downloadLastChromeDriver();
+            //downloadSameVersionInstalledChromeDriver();
             unzipFile();
 
         }
@@ -79,6 +79,7 @@ public class ChromeDriverUpdater
 
         WebClient webClient = new WebClient();
 
+        Console.WriteLine(getUrlSameVersionInstalled(), path + "/chromedriver_win32.zip");
 
         webClient.DownloadFile(getUrlSameVersionInstalled(), path + "/chromedriver_win32.zip");
 
