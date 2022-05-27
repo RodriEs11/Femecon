@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using Microsoft.Win32;
+using System;
+using System.Diagnostics;
+using System.IO;
 using System.IO.Compression;
 using System.Net;
 
@@ -89,6 +92,76 @@ namespace Data
 
 
 
+        }
+
+        public static string obtenerVersionActualChrome() {
+
+
+            string chromePath = (string)Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe", null, null);
+            if (chromePath == null)
+            {
+                throw new Exception("No se ha encontrado ninguna versión de Chrome");
+            }
+
+            var fileVersionInfo = FileVersionInfo.GetVersionInfo(chromePath);
+            return fileVersionInfo.FileVersion;
+
+        }
+
+
+        public static void moverArchivosALocalData() {
+
+            if (File.Exists(Rutas.CODIGOS_TXT))
+            {
+
+                try { File.Delete("Codigos.txt"); } catch (Exception e) { }
+
+            }
+            else {
+
+                try { File.Move("Codigos.txt", Rutas.CODIGOS_TXT); } catch (Exception e) { }
+
+            }
+            if (File.Exists(Rutas.PACIENTE_TXT))
+            {
+
+                try { File.Delete("Paciente.txt"); } catch (Exception e) { }
+
+            }
+            else
+            {
+
+                try { File.Move("Paciente.txt", Rutas.PACIENTE_TXT); } catch (Exception e) { }
+
+            }
+
+            if (File.Exists(Rutas.CHROME_DRIVER_EXE))
+            {
+
+                killProcessChromeDriver();
+                try { File.Delete("chromedriver.exe"); } catch (Exception e) { }
+
+            }
+
+            else {
+                try { File.Move("chromedriver.exe", Rutas.CHROME_DRIVER_EXE); } catch (Exception e) { }
+
+            }
+
+           
+        }
+
+
+        public static bool killProcessChromeDriver()
+        {
+            foreach (Process process in Process.GetProcessesByName("chromedriver"))
+            {
+                process.Kill();
+                process.WaitForExit();
+
+            }
+
+            return true;
         }
 
 

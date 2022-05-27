@@ -16,6 +16,8 @@ namespace Data
 
         public static bool actualizado { get; set; }
 
+        public static bool mostrarNavegadorChromeDriver { get; set; }
+
 
         public static Configuracion getInstance()
         {
@@ -30,17 +32,26 @@ namespace Data
 
         public Configuracion()
         {
-            versionOnline = GithubApi.obtenerUltimaVersion();
-            notasLastRelease = GithubApi.obtenerNotasLastRelease();
+            //versionOnline = GithubApi.obtenerUltimaVersion();
+            //notasLastRelease = GithubApi.obtenerNotasLastRelease();
             versionLocal = Constantes.VERSION_LOCAL;
+            //actualizado = false || versionLocal.Equals(versionOnline);
 
-            actualizado = false || versionLocal.Equals(versionOnline);
+            mostrarNavegadorChromeDriver = false;
 
 
         }
 
+        public void setMostrarNavegadorChromeDriver(bool mostrar) {
 
+            mostrarNavegadorChromeDriver = mostrar;
+        }
 
+        public bool getMostrarNavegadorChromeDriver( )
+        {
+
+            return mostrarNavegadorChromeDriver;
+        }
 
     }
 }

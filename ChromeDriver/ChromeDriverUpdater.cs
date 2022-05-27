@@ -21,7 +21,8 @@ public class ChromeDriverUpdater
         {
             killProcessChromeDriver();
             deleteChromeDriver();
-            downloadLastChromeDriver();
+            //downloadLastChromeDriver();
+            downloadSameVersionInstalledChromeDriver();
             unzipFile();
 
         }
@@ -57,6 +58,13 @@ public class ChromeDriverUpdater
         return url + getVersion() + "/chromedriver_win32.zip";
     }
 
+    private string getUrlSameVersionInstalled()
+    {
+        string url = "https://chromedriver.storage.googleapis.com/";
+
+        return url + Procedimientos.obtenerVersionActualChrome() + "/chromedriver_win32.zip";
+    }
+
     private bool downloadLastChromeDriver()
     {
         WebClient webClient = new WebClient();
@@ -65,6 +73,17 @@ public class ChromeDriverUpdater
         webClient.DownloadFile(getUrlLastVersion(), path + "/chromedriver_win32.zip");
 
         return true;
+    }
+
+    private bool downloadSameVersionInstalledChromeDriver() {
+
+        WebClient webClient = new WebClient();
+
+
+        webClient.DownloadFile(getUrlSameVersionInstalled(), path + "/chromedriver_win32.zip");
+
+        return true;
+
     }
 
     private bool deleteChromeDriver()

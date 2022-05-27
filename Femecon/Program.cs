@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace Femecon
 {
 
-    static class Program
+    public static class Program
     {
 
         /// <summary>
@@ -19,73 +19,62 @@ namespace Femecon
         static void Main(string[] args)
 
         {
+            Configuracion ConfiguracionGlobal = Configuracion.getInstance();
+            //bool estaActualizado = Configuracion.actualizado;
 
+          
 
-            if (File.Exists("Codigos.txt"))
+            foreach (string s in args)
             {
-
-                try { File.Move("Codigos.txt", Rutas.CODIGOS_TXT); } catch (Exception e) { }
-
-            }
-
-            if (File.Exists("Paciente.txt"))
-            {
-
-                try { File.Move("Paciente.txt", Rutas.PACIENTE_TXT); } catch (Exception e) { }
-            }
-
-            if (File.Exists("chromedriver.exe"))
-            {
-
-                try { File.Move("chromedriver.exe", Rutas.CHROME_DRIVER_EXE); } catch (Exception e) { }
-            }
-
-                foreach (string s in args)
+                switch (s)
                 {
-                    switch (s)
-                    {
 
-                        case "--export":
-                            Procedimientos.generarZipRelease();
-                            break;
+                    case "--export":
+                        Procedimientos.generarZipRelease();
+                        break;
 
-                        case "-e":
-                            Procedimientos.generarZipRelease();
-                            break;
-                    }
+                    case "-e":
+                        Procedimientos.generarZipRelease();
+                        break;
+
+                    case "--show":
+                        ConfiguracionGlobal.setMostrarNavegadorChromeDriver(true);
+                        break;
+
+                    case "-s":
+                        ConfiguracionGlobal.setMostrarNavegadorChromeDriver(true);
+                        break;
+
                 }
+            }
 
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
-
-                //Configuracion global = Configuracion.getInstance();
-                //bool estaActualizado = Configuracion.actualizado;
-
+            Procedimientos.moverArchivosALocalData();
 
 
-                if (args.Length == 0)
+
+            //if (estaActualizado)
+            if (true)
                 {
-                    //if (estaActualizado)
-                    if (true)
+
+                    if (!Directory.Exists(Rutas.LOCAL_APPDATA))
                     {
-
-                        if (!Directory.Exists(Rutas.LOCAL_APPDATA))
-                        {
-                            Directory.CreateDirectory(Rutas.LOCAL_APPDATA);
-                        }
-
-                        Form_principal ventanaPrincipal = new Form_principal();
-                        Application.Run(ventanaPrincipal);
-
+                        Directory.CreateDirectory(Rutas.LOCAL_APPDATA);
                     }
-                    else
-                    {
 
-                        Process.Start(Rutas.UPDATER);
+                    Form_principal ventanaPrincipal = new Form_principal();
+                    Application.Run(ventanaPrincipal);
 
-                    }
                 }
+                else
+                {
+
+                    Process.Start(Rutas.UPDATER);
+
+                }
+                
 
             }
         }

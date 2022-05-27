@@ -3,7 +3,7 @@
     public static class Constantes
     {
 
-        public static string VERSION_LOCAL = "2.0.7";
+        public static string VERSION_LOCAL = "2.0.8";
 
 
     }

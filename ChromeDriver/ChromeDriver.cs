@@ -10,6 +10,7 @@ public class ChromeDriver
 {
 
     private OpenQA.Selenium.Chrome.ChromeDriver driver;
+    Configuracion configuracion = Configuracion.getInstance();
 
     public ChromeDriver()
     {
@@ -21,9 +22,15 @@ public class ChromeDriver
         ChromeDriverService driverService = ChromeDriverService.CreateDefaultService(Rutas.LOCAL_APPDATA);
         driverService.HideCommandPromptWindow = true;
         ChromeOptions options = new ChromeOptions();
-        options.AddArguments("headless");
 
+        bool mostrarVentana = configuracion.getMostrarNavegadorChromeDriver();
 
+        if (!mostrarVentana) {
+
+            options.AddArguments("headless");
+        }
+
+        
         driver = new OpenQA.Selenium.Chrome.ChromeDriver(driverService, options);
 
     }
@@ -55,10 +62,7 @@ public class ChromeDriver
             //this.login(paciente);
         }
 
-
-
     }
-
 
 
     public void autorizar(List<Practica> practica, int index, string numeroAfiliado)
