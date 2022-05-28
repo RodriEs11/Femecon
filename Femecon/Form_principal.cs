@@ -3,6 +3,7 @@ using Femecon;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 using static System.Windows.Forms.ListViewItem;
 
@@ -12,6 +13,7 @@ namespace Femecon_2_0
     {
         Lista listaPracticas = new Lista().cargarListadoDePracticasJson();
         Paciente paciente = Paciente.getInstance();
+        bool chromeDriverActualizado = false;
 
         public Form_principal()
         {
@@ -20,6 +22,9 @@ namespace Femecon_2_0
 
         private void Form_principal_Load(object sender, EventArgs e)
         {
+
+            verificarConexionInternet();
+           
 
             if (Directory.Exists(Application.StartupPath + "\\temp"))
             {
@@ -30,12 +35,14 @@ namespace Femecon_2_0
             listaPracticas.setCodigoDxRayos();
 
             label_version.Text = "Ver. " + Constantes.VERSION_LOCAL;
+
             configurarCheckBoxesEcografia();
             configurarPracticasRayos();
 
-            validarChromeDriverSinMensaje();
-
             label_AfiliadoInactivo.Visible = false;
+
+            validarChromeDriver(false);
+
 
         }
 
@@ -147,7 +154,6 @@ namespace Femecon_2_0
 
         }
 
-
         private ListViewItem agregarPracticaALista(ListView lista, Practica practica, int grupo)
         {
 
@@ -173,7 +179,6 @@ namespace Femecon_2_0
         {
             lista.Items.Remove(lista.FindItemWithText(item));
         }
-
 
         private void clickCheckBoxSubsiguiente(object sender, EventArgs e)
         {
@@ -413,7 +418,6 @@ namespace Femecon_2_0
             }
 
         }
-
 
         private void clickEnCheckBoxEcografia(object sender, EventArgs e)
         {
@@ -659,15 +663,12 @@ namespace Femecon_2_0
 
                     }
 
-
                     Form_progresoAutorizacion autorizar = new Form_progresoAutorizacion();
                     autorizar.ShowDialog();
 
                 }
 
-
             }
-
 
         }
 
@@ -1094,7 +1095,7 @@ namespace Femecon_2_0
 
         private void verificarActualizaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            validarChromeDriverConMensaje();
+            validarChromeDriver(true);
         }
 
 
@@ -1129,87 +1130,91 @@ namespace Femecon_2_0
 
 
         }
-        public bool validarChromeDriverConMensaje()
-        {
-            ChromeDriver chromeDriver = new ChromeDriver();
-            bool chromeValidado = false;
-            DialogResult opcion = 0;
+
+        private void verificarConexionInternet() {
+
+            string url = "https://www.google.com/";
+
+            WebRequest request = WebRequest.Create(url);
+            WebResponse response;
+            DialogResult resultadoDialog = DialogResult.Cancel;
 
             try
             {
-                chromeValidado = chromeDriver.validarVersion();
-                chromeDriver.salir();
+
+                response = request.GetResponse();
+
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
+                resultadoDialog = MessageBox.Show("No hay conexión a internet, intente nuevamente", "Femecon", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                
+                if (resultadoDialog == DialogResult.Retry)
+                {
 
-                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    verificarConexionInternet();
 
-            }
+                }
+                if (resultadoDialog == DialogResult.Cancel)
+                {
 
-            if (chromeValidado)
-            {
+                    this.Close();
 
-                MessageBox.Show("El programa se encuentra actualizado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            }
-            else
-            {
-                opcion = MessageBox.Show("Haga click en Aceptar para actualizar el programa", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-            }
-
-            if (opcion == DialogResult.OK)
-            {
-                ChromeDriverUpdater update = new ChromeDriverUpdater();
-                update.updateToLastVersion();
-                MessageBox.Show("El programa se ha actualizado correctamente, vuelva intentar a autorizar", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
             }
-
-            return chromeValidado;
+            
 
         }
-        public bool validarChromeDriverSinMensaje()
-        {
+        public void validarChromeDriver(bool mostrarMensaje) {
 
             ChromeDriver chromeDriver = new ChromeDriver();
-            bool chromeValidado = false;
-            DialogResult opcion = 0;
 
             try
             {
-                chromeValidado = chromeDriver.validarVersion();
+
+                chromeDriver.validarVersion();
                 chromeDriver.salir();
+                chromeDriverActualizado = true;
+
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
 
-                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (mostrarMensaje)
+                {
+
+                    MessageBox.Show(e.Message + "\nHaga click en aceptar para continuar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ChromeDriverUpdater update = new ChromeDriverUpdater();
+                    update.updateChromeDriver();
+                }
+
+                if (!chromeDriverActualizado) {
+
+                    ChromeDriverUpdater update = new ChromeDriverUpdater();
+                    update.updateChromeDriver();
+                }
 
             }
+            finally {
 
-            if (chromeValidado)
-            {
+                if (!chromeDriverActualizado && mostrarMensaje)
+                {
 
-                // MessageBox.Show("El programa se encuentra actualizado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("El programa no se ha actualizado correctamente, intente abrir el programa nuevamente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
 
-            }
-            else
-            {
-                opcion = MessageBox.Show("Haga click en Aceptar para actualizar el programa", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (chromeDriverActualizado && mostrarMensaje)
+                {
 
-            }
+                    MessageBox.Show("El programa se encuentra actualizado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            if (opcion == DialogResult.OK)
-            {
-                ChromeDriverUpdater update = new ChromeDriverUpdater();
-                update.updateToLastVersion();
-                MessageBox.Show("El programa se ha actualizado correctamente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
 
             }
-
-            return chromeValidado;
+    
 
         }
 

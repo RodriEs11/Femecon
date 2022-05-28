@@ -161,10 +161,17 @@ namespace Femecon
             else
             {
 
-                MessageBox.Show("Se cerró la ventana en mitad del proceso, para ver las autorizaciones realizadas hasta el momento, haga click en \"Ver última autorización\"",
+                MessageBox.Show("Se cerró la ventana en mitad del proceso, para ver las autorizaciones realizadas hasta el momento, haga click en \"Ver última autorización\" \n\nSi el problema persiste, reinicie el programa",
                     "Aviso", MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
 
+                this.Invoke(new MethodInvoker(() =>
+                {
+
+
+                    this.Close();
+
+                }));
 
             }
 

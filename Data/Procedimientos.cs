@@ -18,14 +18,11 @@ namespace Data
 
         }
 
-
-
         public static string obtenerRespuestaHTTP(string url)
         {
 
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
-
 
             return new StreamReader(response.GetResponseStream()).ReadToEnd();
         }
@@ -50,12 +47,8 @@ namespace Data
         public static void copiarArchivosTemporalesACarpetaSource()
         {
 
-
             string destino = Directory.GetCurrentDirectory();
-
             FileLibrary.CopyDirectory(Rutas.DIRECTORIO_ACTUAL + "\\temp", destino, false);
-
-
 
         }
 
@@ -90,8 +83,6 @@ namespace Data
                 }
             }
 
-
-
         }
 
         public static string obtenerVersionActualChrome() {
@@ -105,6 +96,17 @@ namespace Data
 
             var fileVersionInfo = FileVersionInfo.GetVersionInfo(chromePath);
             return fileVersionInfo.FileVersion;
+
+        }
+
+        public static string obtenerVersionBaseChrome() {
+
+            string versionCompleta = obtenerVersionActualChrome();
+            string[] temp = versionCompleta.Split('.');
+            string versionBase = temp[0];
+
+
+            return versionBase;
 
         }
 

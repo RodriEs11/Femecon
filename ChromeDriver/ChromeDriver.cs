@@ -59,7 +59,6 @@ public class ChromeDriver
         catch (Exception)
         {
             throw new Exception("La página de Femecon no está disponible en este momento, intente más tarde");
-            //this.login(paciente);
         }
 
     }
@@ -208,7 +207,7 @@ public class ChromeDriver
 
     public bool validarVersion()
     {
-        bool validado = false;
+        bool validado;
 
         try
         {

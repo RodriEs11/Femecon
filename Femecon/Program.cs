@@ -19,10 +19,10 @@ namespace Femecon
         static void Main(string[] args)
 
         {
-            Configuracion ConfiguracionGlobal = Configuracion.getInstance();
-            //bool estaActualizado = Configuracion.actualizado;
 
-          
+            Configuracion ConfiguracionGlobal = Configuracion.getInstance();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
             foreach (string s in args)
             {
@@ -48,35 +48,20 @@ namespace Femecon
                 }
             }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+
 
             Procedimientos.moverArchivosALocalData();
 
-
-
-            //if (estaActualizado)
-            if (true)
-                {
-
-                    if (!Directory.Exists(Rutas.LOCAL_APPDATA))
-                    {
-                        Directory.CreateDirectory(Rutas.LOCAL_APPDATA);
-                    }
-
-                    Form_principal ventanaPrincipal = new Form_principal();
-                    Application.Run(ventanaPrincipal);
-
-                }
-                else
-                {
-
-                    Process.Start(Rutas.UPDATER);
-
-                }
-                
-
+            if (!Directory.Exists(Rutas.LOCAL_APPDATA))
+            {
+                Directory.CreateDirectory(Rutas.LOCAL_APPDATA);
             }
+
+            Form_principal ventanaPrincipal = new Form_principal();
+            Application.Run(ventanaPrincipal);
+
         }
 
     }
+
+}
