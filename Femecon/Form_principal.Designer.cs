@@ -1407,6 +1407,7 @@ namespace Femecon_2_0
             this.textBox_Dni.Name = "textBox_Dni";
             this.textBox_Dni.Size = new System.Drawing.Size(112, 20);
             this.textBox_Dni.TabIndex = 1;
+            this.textBox_Dni.TextChanged += new System.EventHandler(this.textBox_Dni_TextChanged);
             // 
             // button_Salir
             // 

@@ -54,6 +54,54 @@ namespace Data
                     this.clinica = "50";
                     break;
 
+                case "063":
+                    this.clinica = "50";
+                    break;
+
+                case "245":
+                    this.clinica = "50";
+                    break;
+
+                case "357":
+                    this.clinica = "50";
+                    break;
+
+                case "371":
+                    this.clinica = "50";
+                    break;
+
+                case "408":
+                    this.clinica = "50";
+                    break;
+
+                case "410":
+                    this.clinica = "50";
+                    break;
+
+                case "568":
+                    this.clinica = "50";
+                    break;
+
+                case "756":
+                    this.clinica = "50";
+                    break;
+
+                case "791":
+                    this.clinica = "50";
+                    break;
+
+                case "826":
+                    this.clinica = "50";
+                    break;
+
+                case "840":
+                    this.clinica = "50";
+                    break;
+
+                case "861":
+                    this.clinica = "50";
+                    break;
+
                 default:
                     this.clinica = "";
                     this.esFemecon = false;

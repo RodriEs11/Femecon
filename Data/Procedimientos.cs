@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
-
+using System.Text.RegularExpressions;
 
 namespace Data
 {
@@ -150,9 +150,14 @@ namespace Data
 
             }
 
-           
+
         }
 
+        public static string eliminarEspacios(string texto) {
+
+            return Regex.Replace(texto, @"\s", String.Empty);
+        }
+        
 
         public static bool killProcessChromeDriver()
         {

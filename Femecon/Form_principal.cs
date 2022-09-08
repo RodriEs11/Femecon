@@ -54,7 +54,14 @@ namespace Femecon_2_0
         private void textBox_Matricula_TextChanged(object sender, EventArgs e)
         {
             errorProvider_MatriculaTextBox.Clear();
+            textBox_Matricula.Text = Procedimientos.eliminarEspacios(textBox_Matricula.Text);
         }
+
+        private void textBox_Dni_TextChanged(object sender, EventArgs e)
+        {
+            textBox_Dni.Text = Procedimientos.eliminarEspacios(textBox_Dni.Text);
+        }
+
         private void configurarPracticasRayos()
         {
             // SE CONFIGURAN TODOS LOS CONTROLES DEL PANEL DE RAYOS
@@ -992,6 +999,16 @@ namespace Femecon_2_0
 
             }
 
+            if (paciente.epo.Equals("002") || paciente.epo.Equals("441")) {
+               
+                MessageBox.Show("El afiliado debe autorizar los estudios en una delegación de IOMA",
+                            "Aviso",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+
+
+            }
+
         }
 
         private void notificacionPacienteInactivo()
@@ -1218,6 +1235,6 @@ namespace Femecon_2_0
 
         }
 
-
+        
     }
 }
