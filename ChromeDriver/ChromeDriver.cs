@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
-
+using System.IO;
 
 public class ChromeDriver
 {
@@ -23,6 +23,7 @@ public class ChromeDriver
         driverService.HideCommandPromptWindow = true;
         ChromeOptions options = new ChromeOptions();
 
+
         bool mostrarVentana = configuracion.getMostrarNavegadorChromeDriver();
 
         if (!mostrarVentana) {
@@ -30,7 +31,6 @@ public class ChromeDriver
             options.AddArguments("headless");
         }
 
-        
         driver = new OpenQA.Selenium.Chrome.ChromeDriver(driverService, options);
 
     }
@@ -203,8 +203,6 @@ public class ChromeDriver
     }
 
 
-
-
     public bool validarVersion()
     {
         bool validado;
@@ -223,5 +221,71 @@ public class ChromeDriver
 
         return validado;
     }
+
+
+    public void descargarValidacionPDF(Paciente paciente) {
+
+
+        string url = Rutas.URL_IOMA + paciente.dni + paciente.sexo;
+
+        driver.Url = url;
+
+        PrintDocument document = driver.Print(new PrintOptions());
+
+        byte[] sPDFDecoded = Convert.FromBase64String(document.AsBase64EncodedString);
+
+        File.WriteAllBytes(Rutas.CERTIFICACION_PDF, sPDFDecoded);
+
+        this.salir();
+
+    }
+
+    public void abrirYConfigurarCertificacionAfiliatoria(Paciente paciente) {
+
+        string url = "https://autogestion.ioma.gba.gov.ar/usuarios/certificacion";
+
+        driver.Url = url;
+
+        IJavaScriptExecutor scriptExecutor = (IJavaScriptExecutor)driver;
+
+        
+        string numAfiliado = paciente.numeroAfiliado;
+        int sexo = 1;
+
+        // MASCULINO = 1
+        // FEMENINO = 2
+        if (paciente.sexo == 'F') {
+            sexo = 2;
+
+        }
+
+        int year = paciente.fechaDeNacimiento.Year;
+        int month = paciente.fechaDeNacimiento.Month;
+        int day = paciente.fechaDeNacimiento.Day;
+
+        string fechaDeNacimiento = $"{day.ToString("D2")}/{month.ToString("D2")}/{year}";
+
+        string dni = paciente.dni;
+
+        string script = $"document.querySelector(\"#AFI_NroAfil\").value = {numAfiliado}; ";
+        scriptExecutor.ExecuteScript(script);
+
+        script = $"document.querySelector(\"#AFI_Sexo\").value = {sexo};";
+        scriptExecutor.ExecuteScript(script);
+
+        script = $"document.querySelector(\"#AFI_Sexo > option:nth-child({sexo})\").selected = \"selected\";";
+        scriptExecutor.ExecuteScript(script);
+
+        script = $"document.querySelector(\"#Afi_FechaNac\").value = '{fechaDeNacimiento} 12:00:00 a.m.';";
+        scriptExecutor.ExecuteScript(script);
+
+        script = $"document.querySelector(\"#AFI_NroDoc\").value = {dni};";
+        scriptExecutor.ExecuteScript(script);
+
+        
+
+    }
+
+
 }
 

@@ -21,6 +21,7 @@ namespace Data
 
         public static string CODIGOS_TXT = LOCAL_APPDATA + "\\Codigos.txt";
         public static string PACIENTE_TXT = LOCAL_APPDATA + "\\Paciente.txt";
+        public static string CERTIFICACION_PDF = LOCAL_APPDATA + "\\Certificacion.pdf";
 
         //public static string CODIGOS_TXT = "\\Codigos.txt";
         //public static string PACIENTE_TXT ="\\Paciente.txt";

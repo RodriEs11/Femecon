@@ -39,6 +39,8 @@ namespace Femecon
                 paciente.epo = pacienteTemp.epo;
                 paciente.esFemecon = pacienteTemp.esFemecon;
                 paciente.activo = pacienteTemp.activo;
+                paciente.sexo = sexo;
+                paciente.dni = dni;
 
                 return paciente;
             }

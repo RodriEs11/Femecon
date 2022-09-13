@@ -1,6 +1,9 @@
 ﻿using Data;
 using Femecon;
 using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -45,7 +48,10 @@ namespace Femecon_2_0
 
 
         }
-
+        private void Form_principal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Procedimientos.killProcessChromeDriver();
+        }
         private void textBox_Afiliado_TextChanged(object sender, EventArgs e)
         {
             errorProvider_AfiliadoTextBox.Clear();
@@ -518,6 +524,7 @@ namespace Femecon_2_0
                         notificacionPacienteInactivo();
                         notificacionEsFemecon();
                         cargarDatosPacienteEnForm();
+                        
 
                         if (!paciente.activo)
                         {
@@ -545,7 +552,38 @@ namespace Femecon_2_0
             }
 
         }
+        private void printButton_Click(object sender, EventArgs e)
+        {
+            if (paciente.dni != null)
+            {
 
+                try
+                {
+
+                    ChromeDriver driver = new ChromeDriver();
+                    driver.setup();
+                    driver.descargarValidacionPDF(paciente);
+                    Procedimientos.abrirArchivoPDF(Rutas.CERTIFICACION_PDF);
+
+                }
+                catch (Exception exception)
+                {
+
+                    MessageBox.Show(exception.Message);
+
+                }
+
+            }
+            else {
+
+                MessageBox.Show("Primero debe buscar un paciente por DNI antes de imprimir la certificación", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            
+
+
+
+        }
         private void button_Salir_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -721,6 +759,10 @@ namespace Femecon_2_0
 
             label_AfiliadoInactivo.Visible = false;
 
+            printButton.Enabled = false;
+            printValidacionDelAfiliadoToolStripMenuItem.Enabled = false;
+
+            certificacionAfiliatoriaToolStripMenuItem.Enabled = false;
 
             label_NombreAfiliado.Text = "NOMBRE";
             label_numAfiliado.Text = "AFILIADO";
@@ -889,13 +931,16 @@ namespace Femecon_2_0
             if (paciente != null)
             {
 
-                paciente.nombre = "";
-                paciente.apellido = "";
-                paciente.numeroAfiliado = "";
-                paciente.clinica = "";
-                paciente.epo = "";
+                paciente.nombre = null;
+                paciente.apellido = null;
+                paciente.numeroAfiliado = null;
+                paciente.clinica = null;
+                paciente.epo = null;
                 paciente.activo = false;
                 paciente.practicasParaAutorizar.Clear();
+                paciente.sexo = ' ';
+                paciente.dni = null;
+                paciente.fechaDeNacimiento = DateTime.Now;
             }
 
 
@@ -921,6 +966,10 @@ namespace Femecon_2_0
                 label_NombreAfiliado.Text = paciente.nombre + " " + paciente.apellido;
                 label_Epo.Text = paciente.epo;
                 setearRadioButtons();
+
+                printButton.Enabled = true;
+                printValidacionDelAfiliadoToolStripMenuItem.Enabled = true;
+                certificacionAfiliatoriaToolStripMenuItem.Enabled = true;
 
                 if (!paciente.esFemecon)
                 {
@@ -1115,6 +1164,18 @@ namespace Femecon_2_0
             validarChromeDriver(true);
         }
 
+        private void printValidacionDelAfiliadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printButton.PerformClick();
+        }
+
+        private void certificacionAfiliatoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+         
+            Form_CertificacionAfiliatoria certificacionAfiliatoria = new Form_CertificacionAfiliatoria();
+            certificacionAfiliatoria.ShowDialog();
+
+        }
 
         // DEV TOOLS
 

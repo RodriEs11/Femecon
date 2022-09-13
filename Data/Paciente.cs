@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 
 namespace Data
@@ -16,6 +17,9 @@ namespace Data
         public string epo { get; set; }
         public bool esFemecon { get; set; }
         public bool activo { get; set; }
+        public char sexo { get; set; }
+        public string dni { get; set; }
+        public DateTime fechaDeNacimiento { get; set; }
 
         public List<Practica> practicasParaAutorizar = new List<Practica>();
 

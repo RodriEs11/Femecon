@@ -172,6 +172,32 @@ namespace Data
         }
 
 
+        public static void abrirArchivoPDF(string ruta)
+        {
+            try
+            {
+
+                Process p = new Process();
+                p.StartInfo = new ProcessStartInfo()
+                {
+                    CreateNoWindow = true,
+                    FileName = ruta
+
+                };
+
+                p.Start();
+
+            }
+            catch (Exception e) {
+
+                Console.WriteLine(e.Message);
+
+            }
+
+
+           
+        }
+
     }
 
 }
