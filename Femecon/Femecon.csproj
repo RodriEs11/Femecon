@@ -24,7 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>2.0.12.%2a</ApplicationVersion>
+    <ApplicationVersion>2.0.13.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -97,12 +97,6 @@
     <Compile Include="Form_autorizaciones.Designer.cs">
       <DependentUpon>Form_autorizaciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_CertificacionAfiliatoria.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_CertificacionAfiliatoria.Designer.cs">
-      <DependentUpon>Form_CertificacionAfiliatoria.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form_principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,9 +114,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_autorizaciones.resx">
       <DependentUpon>Form_autorizaciones.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_CertificacionAfiliatoria.resx">
-      <DependentUpon>Form_CertificacionAfiliatoria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_principal.resx">
       <DependentUpon>Form_principal.cs</DependentUpon>

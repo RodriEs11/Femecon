@@ -14,17 +14,16 @@ public class ChromeDriver
 
     public ChromeDriver()
     {
-
+         
+        3
     }
 
-    public void setup()
+    public void setup(bool mostrarVentana)
     {
         ChromeDriverService driverService = ChromeDriverService.CreateDefaultService(Rutas.LOCAL_APPDATA);
         driverService.HideCommandPromptWindow = true;
         ChromeOptions options = new ChromeOptions();
 
-
-        bool mostrarVentana = configuracion.getMostrarNavegadorChromeDriver();
 
         if (!mostrarVentana) {
 
@@ -209,7 +208,7 @@ public class ChromeDriver
 
         try
         {
-            this.setup();
+            this.setup(false);
             this.salir();
             validado = true;
         }
@@ -237,6 +236,25 @@ public class ChromeDriver
         File.WriteAllBytes(Rutas.CERTIFICACION_PDF, sPDFDecoded);
 
         this.salir();
+
+    }
+
+    public DateTime obtenerFechaDeNacimiento(Paciente paciente) {
+
+        driver.Url = Rutas.URL_IOMA_PADRON_AFILIADO;
+
+        IWebElement textBoxAfiliado = driver.FindElement(By.XPath("/html/body/table/tbody/tr/td/table[2]/tbody/tr/td/form/div/p[1]/input"));
+        IWebElement buttonBuscar = driver.FindElement(By.XPath("/html/body/table/tbody/tr/td/table[2]/tbody/tr/td/form/div/p[2]/input[1]"));
+
+        textBoxAfiliado.Clear();
+        textBoxAfiliado.SendKeys(paciente.numeroAfiliado);
+
+        buttonBuscar.Submit();
+
+        IWebElement textFechaNacimiento = driver.FindElement(By.XPath("/html/body/div[2]/div/span[12]"));
+
+        //EJ. DEVUELVE 13-Jun-1947
+        return Procedimientos.parseToDateTime(textFechaNacimiento.Text);
 
     }
 
@@ -286,6 +304,63 @@ public class ChromeDriver
 
     }
 
+    public void consultarAutorizaciones(DateTime desde, DateTime hasta, Paciente paciente) {
 
+        driver.Url = Rutas.FEMECON_URL_CONSULTA_AUTORIZACIONES;
+
+
+        IWebElement fechaDesde = driver.FindElement(By.Id("ctl00_ContentPlaceHolder1_txtFrom_dateInput_text"));
+        IWebElement fechaHasta = driver.FindElement(By.Id("ctl00_ContentPlaceHolder1_txtTo_dateInput_text"));
+        
+
+        IJavaScriptExecutor scriptExecutor = (IJavaScriptExecutor)driver;
+
+        string script = "";
+
+        int diaDesde = desde.Day;
+        int mesDesde = desde.Month;
+        int yearDesde = desde.Year;
+
+        int diaHasta = hasta.Day;
+        int mesHasta = hasta.Month;
+        int yearHasta = hasta.Year;
+
+        script = $"document.querySelector(\"#ctl00_ContentPlaceHolder1_txtFrom_dateInput_text\").attributes[1].value = '{diaDesde.ToString("D2")}/{mesDesde.ToString("D2")}/{yearDesde.ToString()}';";
+
+        scriptExecutor.ExecuteScript(script);
+
+
+
+        script = $"document.querySelector(\"#ctl00_ContentPlaceHolder1_txtFrom_dateInput\").attributes[5].value = '{yearDesde.ToString()}-{mesDesde.ToString("D2")}-{diaDesde.ToString("D2")}-00-00-00';";
+
+        scriptExecutor.ExecuteScript(script);
+
+
+        script = $"document.querySelector(\"#ctl00_ContentPlaceHolder1_txtTo_dateInput_text\").attributes[1].value = '{diaHasta.ToString("D2")}/{mesHasta.ToString("D2")}/{yearHasta.ToString()}';";
+
+        scriptExecutor.ExecuteScript(script);
+
+
+
+        script = $"document.querySelector(\"#ctl00_ContentPlaceHolder1_txtTo_dateInput\").attributes[5].value = '{yearHasta.ToString()}-{mesHasta.ToString("D2")}-{diaHasta.ToString("D2")}-00-00-00';";
+
+        scriptExecutor.ExecuteScript(script);
+
+
+
+
+
+        IWebElement pacienteBox = driver.FindElement(By.Id("ctl00_ContentPlaceHolder1_grdQuery_ctl00_ctl02_ctl02_FilterTextBox_name"));
+        pacienteBox.SendKeys(paciente.apellido + " " + paciente.nombre);
+
+        pacienteBox.SendKeys(Keys.Tab);
+
+        IWebElement botonCSV = driver.FindElement(By.Id("ctl00_ContentPlaceHolder1_Button9"));
+        botonCSV.Submit();
+
+        
+        //driver.Close();
+
+    }
 }
 

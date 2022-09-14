@@ -561,7 +561,7 @@ namespace Femecon_2_0
                 {
 
                     ChromeDriver driver = new ChromeDriver();
-                    driver.setup();
+                    driver.setup(false);
                     driver.descargarValidacionPDF(paciente);
                     Procedimientos.abrirArchivoPDF(Rutas.CERTIFICACION_PDF);
 
@@ -969,7 +969,11 @@ namespace Femecon_2_0
 
                 printButton.Enabled = true;
                 printValidacionDelAfiliadoToolStripMenuItem.Enabled = true;
-                certificacionAfiliatoriaToolStripMenuItem.Enabled = true;
+
+                if (paciente.activo) {
+                    certificacionAfiliatoriaToolStripMenuItem.Enabled = true;
+                }
+                
 
                 if (!paciente.esFemecon)
                 {
@@ -1121,6 +1125,24 @@ namespace Femecon_2_0
 
         }
 
+        private void guardarFechaDeNacimiento(Paciente paciente)
+        {
+
+            ChromeDriver driver = new ChromeDriver();
+
+            driver.setup(false);
+            paciente.fechaDeNacimiento = driver.obtenerFechaDeNacimiento(paciente);
+            driver.salir();
+
+        }
+
+        private void abrirVentanaCertificacionAfiliatoria(Paciente paciente)
+        {
+
+            ChromeDriver driver = new ChromeDriver();
+            driver.setup(true);
+            driver.abrirYConfigurarCertificacionAfiliatoria(paciente);
+        }
 
         // MENU STRIP
 
@@ -1171,12 +1193,13 @@ namespace Femecon_2_0
 
         private void certificacionAfiliatoriaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-         
-            Form_CertificacionAfiliatoria certificacionAfiliatoria = new Form_CertificacionAfiliatoria();
-            certificacionAfiliatoria.ShowDialog();
+
+            guardarFechaDeNacimiento(paciente);
+            abrirVentanaCertificacionAfiliatoria(paciente);
 
         }
 
+     
         // DEV TOOLS
 
         private void agregarPracticasAFormDesdeJson(object sender, EventArgs e)

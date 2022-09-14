@@ -35,8 +35,8 @@ namespace Data
         public static string URL_IOMA = "http://sistemasl.ioma.gba.gov.ar/sistemas/alta_complejidad/afiliados_nuevo.php?variables=";
         public static string FEMECON_URL = "http://tecnotouch.sistramed.com/";
         public static string FEMECON_URL_AUTORIZADOR = "http://tecnotouch.sistramed.com/Secure/OrderAuthorization.aspx/";
-
-
+        public static string FEMECON_URL_CONSULTA_AUTORIZACIONES = "https://tecnotouch.sistramed.com/Secure/OrderQuery.aspx";
+        public static string URL_IOMA_PADRON_AFILIADO = "http://sistemasl.ioma.gba.gov.ar/sistemas/consulta_padron_afiliados/consulta_afiliados.php";
 
 
 

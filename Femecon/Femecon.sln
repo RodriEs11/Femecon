@@ -19,6 +19,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "..\Data\Data.csproj", "{B111EA60-1FFF-4A46-A800-66A692DEB5F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlAutorizaciones", "..\ControlAutorizaciones\ControlAutorizaciones.csproj", "{A14A48B7-25E4-4836-85EF-25BCA8EFEF63}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5FE37359-C5D8-4C22-BFD8-C5DED0A656A0} = {5FE37359-C5D8-4C22-BFD8-C5DED0A656A0}
+		{97301A5B-763F-4EDD-AA9C-9F7B9725339F} = {97301A5B-763F-4EDD-AA9C-9F7B9725339F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

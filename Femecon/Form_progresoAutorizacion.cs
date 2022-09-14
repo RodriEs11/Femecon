@@ -27,7 +27,6 @@ namespace Femecon
         {
 
             setearVentana();
-
             backgroundWorker_ChromeDriver.DoWork += new DoWorkEventHandler(autorizarEnSegundoPlano);
             backgroundWorker_ChromeDriver.ProgressChanged += new ProgressChangedEventHandler(procesoCambia);
             backgroundWorker_ChromeDriver.RunWorkerCompleted += new RunWorkerCompletedEventHandler(finDelProceso);
@@ -82,7 +81,7 @@ namespace Femecon
                 }));
 
 
-                driver.setup();
+                driver.setup(false);
                 driver.login(paciente);
 
                 autorizar(paciente);

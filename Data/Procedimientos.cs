@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -196,6 +197,86 @@ namespace Data
 
 
            
+        }
+
+        public static DateTime parseToDateTime(string fecha) {
+
+
+            string[] datos = fecha.Split('-');
+
+            string day = datos[0];
+            string month = getPosicionSegunMes(datos[1]);
+            string year = datos[2];
+
+            string fechaParse = $"{day}-{month}-{year}";
+
+            return DateTime.ParseExact(fechaParse, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+        }
+
+        private static string getPosicionSegunMes(string mes) {
+
+            int posicion;
+
+            switch (mes) {
+
+                case "Ene":
+                    posicion = 1;
+                    break;
+
+                case "Feb":
+                    posicion = 2;
+                    break;
+
+                case "Mar":
+                    posicion = 3;
+                    break;
+
+                case "Abr":
+                    posicion = 4;
+                    break;
+
+                case "May":
+                    posicion = 5;
+                    break;
+
+                case "Jun":
+                    posicion = 6;
+                    break;
+
+                case "Jul":
+                    posicion = 7;
+                    break;
+
+                case "Ago":
+                    posicion = 8;
+                    break;
+
+                case "Sep":
+                    posicion = 9;
+                    break;
+
+                case "Oct":
+                    posicion = 10;
+                    break;
+
+                case "Nov":
+                    posicion = 11;
+                    break;
+
+                case "Dic":
+                    posicion = 12;
+                    break;
+
+                default:
+                    posicion = -1;
+                    break;
+
+
+            }
+
+            return posicion.ToString("D2");    
+
         }
 
     }
