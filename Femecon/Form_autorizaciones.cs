@@ -26,7 +26,10 @@ namespace Femecon
         private void button_Copiar_Click(object sender, EventArgs e)
         {
 
-            Clipboard.SetText(richTextBox_Autorizaciones.Text);
+            //Clipboard.SetText(richTextBox_Autorizaciones.Text
+            richTextBox_Autorizaciones.SelectAll();
+            richTextBox_Autorizaciones.Copy();
+            richTextBox_Autorizaciones.DeselectAll();
 
             MessageBox.Show("Códigos copiados al portapapeles", "Femecon", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -47,7 +50,7 @@ namespace Femecon
             {
                 richTextBox_Autorizaciones.AppendText(codigos[i]);
                 richTextBox_Autorizaciones.AppendText(Environment.NewLine);
-
+                
             }
 
 

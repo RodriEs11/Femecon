@@ -358,7 +358,11 @@ namespace Femecon
 
         private void button_Copiar_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(richTextBox_practicas.Text);
+            //Clipboard.SetText(richTextBox_practicas.Text);
+            richTextBox_practicas.SelectAll();
+            richTextBox_practicas.Copy();
+            richTextBox_practicas.DeselectAll();
+
             MessageBox.Show("Códigos copiados al portapapeles", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
