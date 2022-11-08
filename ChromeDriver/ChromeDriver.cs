@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+
 public class ChromeDriver
 {
 
@@ -24,7 +25,7 @@ public class ChromeDriver
         driverService.HideCommandPromptWindow = true;
         ChromeOptions options = new ChromeOptions();
 
-
+        
         if (!mostrarVentana) {
 
             options.AddArguments("headless");
@@ -67,7 +68,7 @@ public class ChromeDriver
     {
 
         driver.Url = Rutas.FEMECON_URL_AUTORIZADOR;
-
+        
 
         try
         {
@@ -75,7 +76,7 @@ public class ChromeDriver
             IWebElement nroPlanillaBox = driver.FindElement(By.Id("ctl00_ContentPlaceHolder1_txtIdPaper"));
             nroPlanillaBox.Clear();
             nroPlanillaBox.SendKeys("0");
-
+            
 
 
             IWebElement numAfiliadoBox = driver.FindElement(By.Id("ctl00_ContentPlaceHolder1_txtIdPatient"));
@@ -116,9 +117,13 @@ public class ChromeDriver
 
             numMatriculaBox.Submit();
 
+            Console.WriteLine(driver.Url);
+            practica[index].codigoAutorizacion = Procedimientos.obtenerCodigoSegunURL(driver.Url);
+            
+            /*
             IWebElement codigoDeAutorizacionBox = driver.FindElement(By.Id("ctl00_ContentPlaceHolder1_lblCode"));
             practica[index].codigoAutorizacion = codigoDeAutorizacionBox.GetAttribute("value");
-
+            */
         }
         catch (Exception)
         {
@@ -208,7 +213,7 @@ public class ChromeDriver
 
         try
         {
-            this.setup(false);
+            this.setup(Configuracion.mostrarNavegadorChromeDriver);
             this.salir();
             validado = true;
         }

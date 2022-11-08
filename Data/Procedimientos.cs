@@ -279,6 +279,46 @@ namespace Data
 
         }
 
+        public static string obtenerCodigoSegunURL(string url) {
+
+            string codigo = "";
+
+            string[] urlParametros = url.Split('?');
+            string[] parametro = new string[10] ;
+            string[] valorParametro = new string[parametro.Length];
+
+            foreach (string item in urlParametros)
+            {
+                parametro = item.Split('&');
+                
+
+            }
+
+
+            for (int i = 0; i < parametro.Length; i++)
+            {
+                string[] valoresParametros = new string[10];
+
+                valoresParametros = parametro[i].Split('=');
+
+                valorParametro[i] = valoresParametros[valoresParametros.Length-1];
+
+
+            }
+
+
+            codigo = valorParametro[3];
+
+
+            if (codigo.Equals("")) {
+
+                throw new Exception("No se ha podido obtener el código de autorizacion desde la url");
+            }
+           
+
+            return codigo;
+        }
+
     }
 
 }

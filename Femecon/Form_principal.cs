@@ -561,6 +561,7 @@ namespace Femecon_2_0
                 {
 
                     ChromeDriver driver = new ChromeDriver();
+                    //Realiza el prin unicamente en headless mode
                     driver.setup(false);
                     driver.descargarValidacionPDF(paciente);
                     Procedimientos.abrirArchivoPDF(Rutas.CERTIFICACION_PDF);
@@ -1130,7 +1131,7 @@ namespace Femecon_2_0
 
             ChromeDriver driver = new ChromeDriver();
 
-            driver.setup(false);
+            driver.setup(Configuracion.mostrarNavegadorChromeDriver);
             paciente.fechaDeNacimiento = driver.obtenerFechaDeNacimiento(paciente);
             driver.salir();
 
@@ -1140,7 +1141,7 @@ namespace Femecon_2_0
         {
 
             ChromeDriver driver = new ChromeDriver();
-            driver.setup(true);
+            driver.setup(Configuracion.mostrarNavegadorChromeDriver);
             driver.abrirYConfigurarCertificacionAfiliatoria(paciente);
         }
 
@@ -1319,6 +1320,5 @@ namespace Femecon_2_0
 
         }
 
-        
     }
 }

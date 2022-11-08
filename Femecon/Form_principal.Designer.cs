@@ -30,8 +30,8 @@ namespace Femecon_2_0
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Ecografía", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("Radiología", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Ecografía", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Radiología", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_principal));
             this.label_Afiliado = new System.Windows.Forms.Label();
             this.flowLayoutPanel_Afiliado = new System.Windows.Forms.FlowLayoutPanel();
@@ -49,6 +49,7 @@ namespace Femecon_2_0
             this.menu = new System.Windows.Forms.MenuStrip();
             this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printValidacionDelAfiliadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.certificacionAfiliatoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.radioButton_30 = new System.Windows.Forms.RadioButton();
             this.radioButton_40 = new System.Windows.Forms.RadioButton();
             this.radioButton_50 = new System.Windows.Forms.RadioButton();
@@ -157,7 +158,6 @@ namespace Femecon_2_0
             this.toolTip_Practicas = new System.Windows.Forms.ToolTip(this.components);
             this.printButton = new System.Windows.Forms.Button();
             this.printDialog = new System.Windows.Forms.PrintDialog();
-            this.certificacionAfiliatoriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel_Afiliado.SuspendLayout();
             this.menu.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -283,28 +283,28 @@ namespace Femecon_2_0
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // restablecerToolStripMenuItem
             // 
             this.restablecerToolStripMenuItem.Name = "restablecerToolStripMenuItem";
-            this.restablecerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.restablecerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.restablecerToolStripMenuItem.Text = "Restablecer";
             this.restablecerToolStripMenuItem.Click += new System.EventHandler(this.restablecerToolStripMenuItem_Click);
             // 
             // verAutorizacionesToolStripMenuItem
             // 
             this.verAutorizacionesToolStripMenuItem.Name = "verAutorizacionesToolStripMenuItem";
-            this.verAutorizacionesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verAutorizacionesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.verAutorizacionesToolStripMenuItem.Text = "Ver autorizaciones";
             this.verAutorizacionesToolStripMenuItem.Click += new System.EventHandler(this.verAutorizacionesToolStripMenuItem_Click);
             // 
             // autorizarToolStripMenuItem
             // 
             this.autorizarToolStripMenuItem.Name = "autorizarToolStripMenuItem";
-            this.autorizarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.autorizarToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.autorizarToolStripMenuItem.Text = "Autorizar";
             this.autorizarToolStripMenuItem.Click += new System.EventHandler(this.autorizarToolStripMenuItem_Click);
             // 
@@ -348,6 +348,14 @@ namespace Femecon_2_0
             this.printValidacionDelAfiliadoToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.printValidacionDelAfiliadoToolStripMenuItem.Text = "Validación del afiliado";
             this.printValidacionDelAfiliadoToolStripMenuItem.Click += new System.EventHandler(this.printValidacionDelAfiliadoToolStripMenuItem_Click);
+            // 
+            // certificacionAfiliatoriaToolStripMenuItem
+            // 
+            this.certificacionAfiliatoriaToolStripMenuItem.Enabled = false;
+            this.certificacionAfiliatoriaToolStripMenuItem.Name = "certificacionAfiliatoriaToolStripMenuItem";
+            this.certificacionAfiliatoriaToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.certificacionAfiliatoriaToolStripMenuItem.Text = "Certificación afiliatoria";
+            this.certificacionAfiliatoriaToolStripMenuItem.Click += new System.EventHandler(this.certificacionAfiliatoriaToolStripMenuItem_Click);
             // 
             // radioButton_30
             // 
@@ -1481,13 +1489,13 @@ namespace Femecon_2_0
             this.listView_PracticasSeleccionadas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader_PracticasSeleccionadas,
             this.columnHeader_Cantidad});
-            listViewGroup9.Header = "Ecografía";
-            listViewGroup9.Name = "listViewGroup_Eco";
-            listViewGroup10.Header = "Radiología";
-            listViewGroup10.Name = "listViewGroup_Rx";
+            listViewGroup3.Header = "Ecografía";
+            listViewGroup3.Name = "listViewGroup_Eco";
+            listViewGroup4.Header = "Radiología";
+            listViewGroup4.Name = "listViewGroup_Rx";
             this.listView_PracticasSeleccionadas.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup9,
-            listViewGroup10});
+            listViewGroup3,
+            listViewGroup4});
             this.listView_PracticasSeleccionadas.HideSelection = false;
             this.listView_PracticasSeleccionadas.Location = new System.Drawing.Point(269, 30);
             this.listView_PracticasSeleccionadas.Name = "listView_PracticasSeleccionadas";
@@ -1601,14 +1609,6 @@ namespace Femecon_2_0
             // printDialog
             // 
             this.printDialog.UseEXDialog = true;
-            // 
-            // certificacionAfiliatoriaToolStripMenuItem
-            // 
-            this.certificacionAfiliatoriaToolStripMenuItem.Enabled = false;
-            this.certificacionAfiliatoriaToolStripMenuItem.Name = "certificacionAfiliatoriaToolStripMenuItem";
-            this.certificacionAfiliatoriaToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.certificacionAfiliatoriaToolStripMenuItem.Text = "Certificación afiliatoria";
-            this.certificacionAfiliatoriaToolStripMenuItem.Click += new System.EventHandler(this.certificacionAfiliatoriaToolStripMenuItem_Click);
             // 
             // Form_principal
             // 

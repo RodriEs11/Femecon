@@ -13,6 +13,7 @@ namespace Femecon
         Paciente paciente = Paciente.getInstance();
         ChromeDriver driver = new ChromeDriver();
         bool cierreProcesoALaMitad = false;
+        Configuracion configuracion = Configuracion.getInstance();
 
 
         public Form_progresoAutorizacion()
@@ -81,7 +82,9 @@ namespace Femecon
                 }));
 
 
-                driver.setup(false);
+                bool mostrarNavegador = configuracion.getMostrarNavegadorChromeDriver();
+
+                driver.setup(mostrarNavegador);
                 driver.login(paciente);
 
                 autorizar(paciente);
@@ -157,15 +160,22 @@ namespace Femecon
                     "Aviso", MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
 
+                try
+                {
+                    this.Invoke(new MethodInvoker(() =>
+                    {
 
 
-                this.Invoke(new MethodInvoker(() =>
+                        this.Close();
+
+                    }));
+                }
+                catch (Exception)
                 {
 
+                   
+                }
 
-                    this.Close();
-
-                }));
 
             }
 
@@ -307,7 +317,7 @@ namespace Femecon
 
                 }));
 
-
+                
                 driver.autorizar(paciente.practicasParaAutorizar, i, numeroAfiliado);
 
                 // RESETEA EL ARCHIVO DE LOS CODIGOS, SOLO SI SE AUTORIZA EL PRIMER ESTUDIO, 
