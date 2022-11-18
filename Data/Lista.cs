@@ -51,10 +51,18 @@ namespace Data
                     ""nombreGuardadoEnArchivos"": ""Prol: ""
                   },
                   {
-                    ""nombre"": ""Magnificación / Focalización"",
+                    ""nombre"": ""Magnificación / Focalización unilateral"",
                     ""orden"": 32,
                     ""codigo"": 883403,
                     ""tieneCantidad"": false,
+                    ""nombreGuardadoEnArchivos"": ""Magni/Foc: ""
+                  },
+                  {
+                    ""nombre"": ""Magnificación / Focalización bilateral"",
+                    ""orden"": 33,
+                    ""codigo"": 883403,
+                    ""tieneCantidad"": true,
+                    ""cantidad"": 2,
                     ""nombreGuardadoEnArchivos"": ""Magni/Foc: ""
                   },
                   {

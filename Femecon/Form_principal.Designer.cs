@@ -30,8 +30,8 @@ namespace Femecon_2_0
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Ecografía", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Radiología", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Ecografía", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Radiología", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_principal));
             this.label_Afiliado = new System.Windows.Forms.Label();
             this.flowLayoutPanel_Afiliado = new System.Windows.Forms.FlowLayoutPanel();
@@ -158,6 +158,7 @@ namespace Femecon_2_0
             this.toolTip_Practicas = new System.Windows.Forms.ToolTip(this.components);
             this.printButton = new System.Windows.Forms.Button();
             this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel_Afiliado.SuspendLayout();
             this.menu.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -560,16 +561,16 @@ namespace Femecon_2_0
             this.checkBox_Magnificacion.AutoSize = true;
             this.checkBox_Magnificacion.Location = new System.Drawing.Point(3, 95);
             this.checkBox_Magnificacion.Name = "checkBox_Magnificacion";
-            this.checkBox_Magnificacion.Size = new System.Drawing.Size(162, 17);
+            this.checkBox_Magnificacion.Size = new System.Drawing.Size(207, 17);
             this.checkBox_Magnificacion.TabIndex = 24;
             this.checkBox_Magnificacion.Tag = "";
-            this.checkBox_Magnificacion.Text = "Magnificación / Focalización";
+            this.checkBox_Magnificacion.Text = "Magnificación / Focalización unilateral";
             this.checkBox_Magnificacion.UseVisualStyleBackColor = true;
             // 
             // checkBox_Dmo1Reg
             // 
             this.checkBox_Dmo1Reg.AutoSize = true;
-            this.checkBox_Dmo1Reg.Location = new System.Drawing.Point(3, 118);
+            this.checkBox_Dmo1Reg.Location = new System.Drawing.Point(3, 141);
             this.checkBox_Dmo1Reg.Name = "checkBox_Dmo1Reg";
             this.checkBox_Dmo1Reg.Size = new System.Drawing.Size(133, 17);
             this.checkBox_Dmo1Reg.TabIndex = 25;
@@ -580,7 +581,7 @@ namespace Femecon_2_0
             // checkBox_Dmo2Reg
             // 
             this.checkBox_Dmo2Reg.AutoSize = true;
-            this.checkBox_Dmo2Reg.Location = new System.Drawing.Point(3, 141);
+            this.checkBox_Dmo2Reg.Location = new System.Drawing.Point(3, 164);
             this.checkBox_Dmo2Reg.Name = "checkBox_Dmo2Reg";
             this.checkBox_Dmo2Reg.Size = new System.Drawing.Size(144, 17);
             this.checkBox_Dmo2Reg.TabIndex = 26;
@@ -591,7 +592,7 @@ namespace Femecon_2_0
             // checkBox_EcoGine
             // 
             this.checkBox_EcoGine.AutoSize = true;
-            this.checkBox_EcoGine.Location = new System.Drawing.Point(3, 164);
+            this.checkBox_EcoGine.Location = new System.Drawing.Point(3, 187);
             this.checkBox_EcoGine.Name = "checkBox_EcoGine";
             this.checkBox_EcoGine.Size = new System.Drawing.Size(193, 17);
             this.checkBox_EcoGine.TabIndex = 27;
@@ -602,7 +603,7 @@ namespace Femecon_2_0
             // checkBox_EcoTiroides
             // 
             this.checkBox_EcoTiroides.AutoSize = true;
-            this.checkBox_EcoTiroides.Location = new System.Drawing.Point(3, 187);
+            this.checkBox_EcoTiroides.Location = new System.Drawing.Point(3, 210);
             this.checkBox_EcoTiroides.Name = "checkBox_EcoTiroides";
             this.checkBox_EcoTiroides.Size = new System.Drawing.Size(109, 17);
             this.checkBox_EcoTiroides.TabIndex = 28;
@@ -613,7 +614,7 @@ namespace Femecon_2_0
             // checkBox_EcoAbdominal
             // 
             this.checkBox_EcoAbdominal.AutoSize = true;
-            this.checkBox_EcoAbdominal.Location = new System.Drawing.Point(3, 210);
+            this.checkBox_EcoAbdominal.Location = new System.Drawing.Point(3, 233);
             this.checkBox_EcoAbdominal.Name = "checkBox_EcoAbdominal";
             this.checkBox_EcoAbdominal.Size = new System.Drawing.Size(124, 17);
             this.checkBox_EcoAbdominal.TabIndex = 29;
@@ -624,7 +625,7 @@ namespace Femecon_2_0
             // checkBox_EcoHepato
             // 
             this.checkBox_EcoHepato.AutoSize = true;
-            this.checkBox_EcoHepato.Location = new System.Drawing.Point(3, 279);
+            this.checkBox_EcoHepato.Location = new System.Drawing.Point(216, 3);
             this.checkBox_EcoHepato.Name = "checkBox_EcoHepato";
             this.checkBox_EcoHepato.Size = new System.Drawing.Size(130, 17);
             this.checkBox_EcoHepato.TabIndex = 32;
@@ -635,7 +636,7 @@ namespace Femecon_2_0
             // checkBox_EcoVesical
             // 
             this.checkBox_EcoVesical.AutoSize = true;
-            this.checkBox_EcoVesical.Location = new System.Drawing.Point(3, 256);
+            this.checkBox_EcoVesical.Location = new System.Drawing.Point(3, 279);
             this.checkBox_EcoVesical.Name = "checkBox_EcoVesical";
             this.checkBox_EcoVesical.Size = new System.Drawing.Size(166, 17);
             this.checkBox_EcoVesical.TabIndex = 31;
@@ -646,7 +647,7 @@ namespace Femecon_2_0
             // checkBox_EcoRenal
             // 
             this.checkBox_EcoRenal.AutoSize = true;
-            this.checkBox_EcoRenal.Location = new System.Drawing.Point(3, 233);
+            this.checkBox_EcoRenal.Location = new System.Drawing.Point(3, 256);
             this.checkBox_EcoRenal.Name = "checkBox_EcoRenal";
             this.checkBox_EcoRenal.Size = new System.Drawing.Size(99, 17);
             this.checkBox_EcoRenal.TabIndex = 30;
@@ -657,7 +658,7 @@ namespace Femecon_2_0
             // checkBox_EcoAmbasCaderas
             // 
             this.checkBox_EcoAmbasCaderas.AutoSize = true;
-            this.checkBox_EcoAmbasCaderas.Location = new System.Drawing.Point(202, 3);
+            this.checkBox_EcoAmbasCaderas.Location = new System.Drawing.Point(216, 26);
             this.checkBox_EcoAmbasCaderas.Name = "checkBox_EcoAmbasCaderas";
             this.checkBox_EcoAmbasCaderas.Size = new System.Drawing.Size(148, 17);
             this.checkBox_EcoAmbasCaderas.TabIndex = 33;
@@ -668,7 +669,7 @@ namespace Femecon_2_0
             // checkBox_EcoCerebral
             // 
             this.checkBox_EcoCerebral.AutoSize = true;
-            this.checkBox_EcoCerebral.Location = new System.Drawing.Point(202, 72);
+            this.checkBox_EcoCerebral.Location = new System.Drawing.Point(216, 95);
             this.checkBox_EcoCerebral.Name = "checkBox_EcoCerebral";
             this.checkBox_EcoCerebral.Size = new System.Drawing.Size(114, 17);
             this.checkBox_EcoCerebral.TabIndex = 36;
@@ -679,7 +680,7 @@ namespace Femecon_2_0
             // checkBox_EcoTesticular
             // 
             this.checkBox_EcoTesticular.AutoSize = true;
-            this.checkBox_EcoTesticular.Location = new System.Drawing.Point(202, 26);
+            this.checkBox_EcoTesticular.Location = new System.Drawing.Point(216, 49);
             this.checkBox_EcoTesticular.Name = "checkBox_EcoTesticular";
             this.checkBox_EcoTesticular.Size = new System.Drawing.Size(118, 17);
             this.checkBox_EcoTesticular.TabIndex = 34;
@@ -690,7 +691,7 @@ namespace Femecon_2_0
             // checkBox_EcoPartesBlandas
             // 
             this.checkBox_EcoPartesBlandas.AutoSize = true;
-            this.checkBox_EcoPartesBlandas.Location = new System.Drawing.Point(202, 49);
+            this.checkBox_EcoPartesBlandas.Location = new System.Drawing.Point(216, 72);
             this.checkBox_EcoPartesBlandas.Name = "checkBox_EcoPartesBlandas";
             this.checkBox_EcoPartesBlandas.Size = new System.Drawing.Size(145, 17);
             this.checkBox_EcoPartesBlandas.TabIndex = 35;
@@ -716,6 +717,7 @@ namespace Femecon_2_0
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_mamografia);
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_prolongacion);
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_Magnificacion);
+            this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox2);
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_Dmo1Reg);
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_Dmo2Reg);
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_EcoGine);
@@ -1489,13 +1491,13 @@ namespace Femecon_2_0
             this.listView_PracticasSeleccionadas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader_PracticasSeleccionadas,
             this.columnHeader_Cantidad});
-            listViewGroup3.Header = "Ecografía";
-            listViewGroup3.Name = "listViewGroup_Eco";
-            listViewGroup4.Header = "Radiología";
-            listViewGroup4.Name = "listViewGroup_Rx";
+            listViewGroup1.Header = "Ecografía";
+            listViewGroup1.Name = "listViewGroup_Eco";
+            listViewGroup2.Header = "Radiología";
+            listViewGroup2.Name = "listViewGroup_Rx";
             this.listView_PracticasSeleccionadas.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup3,
-            listViewGroup4});
+            listViewGroup1,
+            listViewGroup2});
             this.listView_PracticasSeleccionadas.HideSelection = false;
             this.listView_PracticasSeleccionadas.Location = new System.Drawing.Point(269, 30);
             this.listView_PracticasSeleccionadas.Name = "listView_PracticasSeleccionadas";
@@ -1609,6 +1611,17 @@ namespace Femecon_2_0
             // printDialog
             // 
             this.printDialog.UseEXDialog = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(3, 118);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(201, 17);
+            this.checkBox2.TabIndex = 37;
+            this.checkBox2.Tag = "";
+            this.checkBox2.Text = "Magnificación / Focalización bilateral";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // Form_principal
             // 
@@ -1844,5 +1857,6 @@ namespace Femecon_2_0
         private System.Windows.Forms.ToolStripMenuItem imprimirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printValidacionDelAfiliadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem certificacionAfiliatoriaToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

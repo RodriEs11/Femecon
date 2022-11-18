@@ -178,7 +178,7 @@ namespace Femecon_2_0
             subItemCantidad.Text = practica.cantidad.ToString();
 
             //CORRECCION AL MOSTRAR LA CANTIDAD DE MAMOGRAFIA
-            if (practica.tieneCantidad && practica.codigo != 340601 && practica.codigo != 340602)
+            if (practica.tieneCantidad && practica.codigo != 340601 && practica.codigo != 340602 && practica.codigo != 883403)
             {
                 itemAgregado.SubItems.Add(subItemCantidad);
             }
@@ -651,7 +651,6 @@ namespace Femecon_2_0
 
         private void button_Autorizar_Click(object sender, EventArgs e)
         {
-
 
             bool afiliadoValidado = validarAfiliado();
             bool practicasValidado = validarPracticas();
@@ -1141,7 +1140,7 @@ namespace Femecon_2_0
         {
 
             ChromeDriver driver = new ChromeDriver();
-            driver.setup(Configuracion.mostrarNavegadorChromeDriver);
+            driver.setup(true);
             driver.abrirYConfigurarCertificacionAfiliatoria(paciente);
         }
 

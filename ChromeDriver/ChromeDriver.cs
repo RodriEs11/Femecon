@@ -114,10 +114,24 @@ public class ChromeDriver
             numMatriculaBox.SendKeys(practica[index].matricula);
             numMatriculaBox.SendKeys(Keys.Tab);
 
+            IWebElement nombreAfiliadoBox = driver.FindElement(By.Id("ctl00_ContentPlaceHolder1_divPatient"));
+            string nombreAfiliado = nombreAfiliadoBox.GetAttribute("value");
 
+            bool salir = false;
+
+            while (!salir) {
+
+                if (!nombreAfiliado.Equals("")) {
+                    salir = true;
+                }
+
+                nombreAfiliado = nombreAfiliadoBox.GetAttribute("value");
+
+            }
+            
             numMatriculaBox.Submit();
 
-            Console.WriteLine(driver.Url);
+            
             practica[index].codigoAutorizacion = Procedimientos.obtenerCodigoSegunURL(driver.Url);
             
             /*
