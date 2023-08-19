@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Linq;
 
 
 public class ChromeDriver
@@ -310,10 +311,21 @@ public class ChromeDriver
         script = $"document.querySelector(\"#AFI_Sexo\").value = {sexo};";
         scriptExecutor.ExecuteScript(script);
 
+
         script = $"document.querySelector(\"#AFI_Sexo > option:nth-child({sexo})\").selected = \"selected\";";
         scriptExecutor.ExecuteScript(script);
 
-        script = $"document.querySelector(\"#Afi_FechaNac\").value = '{fechaDeNacimiento} 12:00:00 a.m.';";
+
+        //Selecciona el campo "Identidad" y lo selecciona para que se muestre en el select
+        script = "var selectElement = document.getElementById('AFI_Sexo'); " +
+        $"selectElement.value = '{sexo}'; " +
+        "var event = new Event('change', { bubbles: true });" +
+        "selectElement.dispatchEvent(event);";
+
+        scriptExecutor.ExecuteScript(script);
+
+
+        script = $"document.querySelector(\"#birthdate\").value = '{fechaDeNacimiento} 12:00:00 a.m.';";
         scriptExecutor.ExecuteScript(script);
 
         script = $"document.querySelector(\"#AFI_NroDoc\").value = {dni};";

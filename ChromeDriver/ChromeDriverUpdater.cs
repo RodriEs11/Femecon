@@ -1,24 +1,22 @@
 ﻿using Data;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net;
-
-
-
 
 public class ChromeDriverUpdater
 {
 
     string path = Rutas.LOCAL_APPDATA;
+    string zipPath = Rutas.LOCAL_APPDATA + "/chromedriver_win32.zip";
     string localVersionChrome;
-    string localVersionComplete;
 
     public ChromeDriverUpdater() {
 
         localVersionChrome = Procedimientos.obtenerVersionBaseChrome();
-        localVersionComplete = getVersionReleaseSpecific(localVersionChrome);
 
     }
 
@@ -26,10 +24,12 @@ public class ChromeDriverUpdater
     {
         try
         {
+                        
             killProcessChromeDriver();
             deleteChromeDriver();
             downloadSameVersionInstalledChromeDriver();
             unzipFile();
+            
 
         }
         catch (Exception e)
@@ -38,32 +38,27 @@ public class ChromeDriverUpdater
             throw new Exception(e.Message);
         }
 
-
     }
 
-   
-    public string getVersionReleaseSpecific(string version)
-    {
+    public string getUrlLastKnownGoodVersion() {
 
-        string url = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_" + version;
+               
+        string url = "https://googlechromelabs.github.io/chrome-for-testing/latest-versions-per-milestone-with-downloads.json";
 
         WebRequest request = WebRequest.Create(url);
         WebResponse response = request.GetResponse();
-
         StreamReader reader = new StreamReader(response.GetResponseStream());
 
+        JObject json = JObject.Parse(reader.ReadToEnd());
 
-        return reader.ReadToEnd().Trim();
+        JToken chrodriverEndPoints = json["milestones"][localVersionChrome]["downloads"]["chromedriver"];
+        JToken win32Url = chrodriverEndPoints.FirstOrDefault(item => item["platform"].ToString() == "win32")?["url"];
+
+        
+        return win32Url.ToString();
 
     }
 
-
-    private string getUrlInstalledVersion()
-    {
-        string url = "https://chromedriver.storage.googleapis.com/";
-
-        return url + localVersionComplete + "/chromedriver_win32.zip";
-    }
 
     
     private bool downloadSameVersionInstalledChromeDriver() {
@@ -74,7 +69,7 @@ public class ChromeDriverUpdater
         try
         {
 
-            webClient.DownloadFile(getUrlInstalledVersion(), path + "/chromedriver_win32.zip");
+            webClient.DownloadFile(getUrlLastKnownGoodVersion(), zipPath);
         }
         catch {
 
@@ -114,15 +109,30 @@ public class ChromeDriverUpdater
         try
         {
 
-            ZipFile.ExtractToDirectory(path + "/chromedriver_win32.zip", path);
-
-
-            if (File.Exists(path + "/chromedriver_win32.zip"))
+            
+            using (ZipArchive archive = ZipFile.OpenRead(zipPath))
             {
+                foreach (ZipArchiveEntry entry in archive.Entries)
+                {
+                    string entryPath = Path.Combine(path, entry.Name);
 
-                File.Delete(path + "/chromedriver_win32.zip");
+                    // Si el archivo ya existe, se reemplaza
+                    if (File.Exists(entryPath))
+                    {
+                        File.Delete(entryPath);
+                    }
+
+                    entry.ExtractToFile(entryPath);
+                }
             }
 
+            if (File.Exists(zipPath))
+            {
+
+                File.Delete(zipPath);
+            }
+
+            
         }
         catch {
 
