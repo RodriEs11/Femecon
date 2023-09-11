@@ -1,11 +1,9 @@
 ﻿using Data;
-using libs;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Linq;
 
 
 public class ChromeDriver

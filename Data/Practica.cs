@@ -33,7 +33,26 @@ namespace Data
         }
 
 
+        public Practica Clone()
+        {
+            Practica copia = new Practica
+            {
+                orden = this.orden,
+                codigo = this.codigo,
+                nombre = this.nombre,
+                codigoAutorizacion = this.codigoAutorizacion,
+                codigoDx = this.codigoDx,
+                cantidad = this.cantidad,
+                tieneCantidad = this.tieneCantidad,
+                nombreGuardadoEnArchivos = this.nombreGuardadoEnArchivos,
+                matricula = this.matricula,
+                matriculaModificada = this.matriculaModificada,
+                tieneSubsiguiente = this.tieneSubsiguiente,
+                descripcion = this.descripcion
+            };
 
+            return copia;
+        }
 
 
         public int CompareTo(Practica practica)
@@ -61,6 +80,15 @@ namespace Data
             return $"Orden:[{this.orden}] - Codigo:[{this.codigo}] - Nombre:[{this.nombre}] - CodigoDx:[{this.codigoDx}] - Cantidad:[{this.cantidad}] - TieneCantidad:[{this.tieneCantidad}] - TieneSubsiguiente:[{this.tieneSubsiguiente}] - Matricula:[{this.matricula}] - MatriculaModificada:[{this.matriculaModificada}] - NombreEnArchivo:[{this.nombreGuardadoEnArchivos}]";
 
         }
+
+
+        public bool iguales(Practica practicaAcomparar)
+        {
+            return this.codigo == practicaAcomparar.codigo &&
+                this.nombre == practicaAcomparar.nombre;
+           
+        }
+
 
     }
 

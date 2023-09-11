@@ -59,6 +59,7 @@ namespace Femecon
 
             Form_principal ventanaPrincipal = new Form_principal();
             Application.Run(ventanaPrincipal);
+            
 
         }
 

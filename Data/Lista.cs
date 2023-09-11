@@ -370,7 +370,7 @@ namespace Data
         public Practica traerPracticaPorCodigoEcografia(int codigo)
         {
 
-            return ecografia.SingleOrDefault(ecografia => ecografia.codigo == codigo);
+            return ecografia.FirstOrDefault(ecografia => ecografia.codigo == codigo);
         }
 
         public Practica traerPracticaPorCodigoRayos(int codigo)

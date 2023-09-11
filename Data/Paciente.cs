@@ -132,5 +132,64 @@ namespace Data
 
         }
 
+        public Paciente Clone()
+        {
+
+            Paciente pacienteClonado = new Paciente();
+
+            pacienteClonado.nombre = this.nombre;
+            pacienteClonado.apellido = this.apellido;
+            pacienteClonado.numeroAfiliado = this.numeroAfiliado;
+            pacienteClonado.clinica = this.clinica;
+            pacienteClonado.epo = this.epo;
+            pacienteClonado.esFemecon = this.esFemecon;
+            pacienteClonado.activo = this.activo;
+            pacienteClonado.sexo = this.sexo;
+            pacienteClonado.dni = this.dni;
+            pacienteClonado.fechaDeNacimiento = this.fechaDeNacimiento;
+            pacienteClonado.practicasParaAutorizar = new List<Practica>();
+
+            foreach (var practica in this.practicasParaAutorizar)
+            {
+                pacienteClonado.practicasParaAutorizar.Add(practica.Clone());
+            }
+
+            return pacienteClonado;
+        }
+
+        public void restaurarDesde(Paciente otroPaciente)
+        {
+           
+            this.nombre = otroPaciente.nombre;
+            this.apellido = otroPaciente.apellido;
+            this.numeroAfiliado = otroPaciente.numeroAfiliado;
+            this.clinica = otroPaciente.clinica;
+            this.epo = otroPaciente.epo;
+            this.esFemecon = otroPaciente.esFemecon;
+            this.activo = otroPaciente.activo;
+            this.sexo = otroPaciente.sexo;
+            this.dni = otroPaciente.dni;
+            this.fechaDeNacimiento = otroPaciente.fechaDeNacimiento;
+
+           
+            this.practicasParaAutorizar.Clear();
+            this.practicasParaAutorizar.AddRange(otroPaciente.practicasParaAutorizar);
+        }
+
+        public bool contienePractica(Practica practica) {
+
+            for (int i = 0; i < this.practicasParaAutorizar.Count; i++)
+            {
+                if (practicasParaAutorizar[i].iguales(practica))
+                {
+                    return true;
+                    
+                }
+            }
+
+            return false;
+
+        }
+        
     }
 }

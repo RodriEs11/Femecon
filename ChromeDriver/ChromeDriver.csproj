@@ -60,10 +60,6 @@
       <Project>{B111EA60-1FFF-4A46-A800-66A692DEB5F9}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\libs\Libs.csproj">
-      <Project>{97301A5B-763F-4EDD-AA9C-9F7B9725339F}</Project>
-      <Name>Libs</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

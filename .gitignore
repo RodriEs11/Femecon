@@ -42,3 +42,4 @@
 *.cache
 *.vsidx
 /ControlAutorizaciones
+/libs/Credenciales.cs

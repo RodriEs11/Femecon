@@ -1,8 +1,7 @@
-﻿namespace libs
+﻿namespace Data
 {
     public class Credenciales
     {
-        public static string token = "GIT_HUB_TOKEN";
 
         public static string user_1 = "USER";
         public static string pass_1 = "PASSWORD";

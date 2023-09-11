@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Femecon
@@ -10,24 +11,26 @@ namespace Femecon
     public partial class Form_progresoAutorizacion : Form
     {
 
-        Paciente paciente = Paciente.getInstance();
+        Paciente paciente = null;
         ChromeDriver driver = new ChromeDriver();
         bool cierreProcesoALaMitad = false;
         Configuracion configuracion = Configuracion.getInstance();
 
 
-        public Form_progresoAutorizacion()
+        public Form_progresoAutorizacion(Paciente pacienteAutorizar)
         {
+            this.paciente = pacienteAutorizar;
             InitializeComponent();
-
-
 
         }
 
+      
+       
         private void Form_progresoAutorizacion_Load(object sender, EventArgs e)
         {
 
             setearVentana();
+           
             backgroundWorker_ChromeDriver.DoWork += new DoWorkEventHandler(autorizarEnSegundoPlano);
             backgroundWorker_ChromeDriver.ProgressChanged += new ProgressChangedEventHandler(procesoCambia);
             backgroundWorker_ChromeDriver.RunWorkerCompleted += new RunWorkerCompletedEventHandler(finDelProceso);
@@ -36,6 +39,8 @@ namespace Femecon
             backgroundWorker_ChromeDriver.WorkerSupportsCancellation = true;
 
             backgroundWorker_ChromeDriver.RunWorkerAsync();
+            
+           
 
         }
 

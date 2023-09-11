@@ -30,8 +30,8 @@ namespace Femecon_2_0
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Ecografía", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Radiología", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Ecografía", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Radiología", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_principal));
             this.label_Afiliado = new System.Windows.Forms.Label();
             this.flowLayoutPanel_Afiliado = new System.Windows.Forms.FlowLayoutPanel();
@@ -84,6 +84,7 @@ namespace Femecon_2_0
             this.checkBox_EcoPartesBlandas = new System.Windows.Forms.CheckBox();
             this.tabPage_Ecografia = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel_Ecografia = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBox_MagnificacionBilateral = new System.Windows.Forms.CheckBox();
             this.tabControl_Estudios = new System.Windows.Forms.TabControl();
             this.tabPage_Rayos = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel_Rx = new System.Windows.Forms.FlowLayoutPanel();
@@ -157,8 +158,12 @@ namespace Femecon_2_0
             this.label_Clinica = new System.Windows.Forms.Label();
             this.toolTip_Practicas = new System.Windows.Forms.ToolTip(this.components);
             this.printButton = new System.Windows.Forms.Button();
+            this.button_agregarPaciente = new System.Windows.Forms.Button();
             this.printDialog = new System.Windows.Forms.PrintDialog();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.listadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verListadoActualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abrirListadojsonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarListadoActualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel_Afiliado.SuspendLayout();
             this.menu.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -284,28 +289,28 @@ namespace Femecon_2_0
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // restablecerToolStripMenuItem
             // 
             this.restablecerToolStripMenuItem.Name = "restablecerToolStripMenuItem";
-            this.restablecerToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.restablecerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.restablecerToolStripMenuItem.Text = "Restablecer";
             this.restablecerToolStripMenuItem.Click += new System.EventHandler(this.restablecerToolStripMenuItem_Click);
             // 
             // verAutorizacionesToolStripMenuItem
             // 
             this.verAutorizacionesToolStripMenuItem.Name = "verAutorizacionesToolStripMenuItem";
-            this.verAutorizacionesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.verAutorizacionesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verAutorizacionesToolStripMenuItem.Text = "Ver autorizaciones";
             this.verAutorizacionesToolStripMenuItem.Click += new System.EventHandler(this.verAutorizacionesToolStripMenuItem_Click);
             // 
             // autorizarToolStripMenuItem
             // 
             this.autorizarToolStripMenuItem.Name = "autorizarToolStripMenuItem";
-            this.autorizarToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.autorizarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.autorizarToolStripMenuItem.Text = "Autorizar";
             this.autorizarToolStripMenuItem.Click += new System.EventHandler(this.autorizarToolStripMenuItem_Click);
             // 
@@ -315,6 +320,7 @@ namespace Femecon_2_0
             this.autorizarToolStripMenuItem,
             this.verAutorizacionesToolStripMenuItem,
             this.restablecerToolStripMenuItem,
+            this.listadoToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.ToolStripMenuItem_menu.Name = "ToolStripMenuItem_menu";
             this.ToolStripMenuItem_menu.Size = new System.Drawing.Size(50, 20);
@@ -573,7 +579,7 @@ namespace Femecon_2_0
             this.checkBox_Dmo1Reg.Location = new System.Drawing.Point(3, 141);
             this.checkBox_Dmo1Reg.Name = "checkBox_Dmo1Reg";
             this.checkBox_Dmo1Reg.Size = new System.Drawing.Size(133, 17);
-            this.checkBox_Dmo1Reg.TabIndex = 25;
+            this.checkBox_Dmo1Reg.TabIndex = 26;
             this.checkBox_Dmo1Reg.Tag = "";
             this.checkBox_Dmo1Reg.Text = "Densitometría 1 región";
             this.checkBox_Dmo1Reg.UseVisualStyleBackColor = true;
@@ -584,7 +590,7 @@ namespace Femecon_2_0
             this.checkBox_Dmo2Reg.Location = new System.Drawing.Point(3, 164);
             this.checkBox_Dmo2Reg.Name = "checkBox_Dmo2Reg";
             this.checkBox_Dmo2Reg.Size = new System.Drawing.Size(144, 17);
-            this.checkBox_Dmo2Reg.TabIndex = 26;
+            this.checkBox_Dmo2Reg.TabIndex = 27;
             this.checkBox_Dmo2Reg.Tag = "";
             this.checkBox_Dmo2Reg.Text = "Densitometría 2 regiones";
             this.checkBox_Dmo2Reg.UseVisualStyleBackColor = true;
@@ -595,7 +601,7 @@ namespace Femecon_2_0
             this.checkBox_EcoGine.Location = new System.Drawing.Point(3, 187);
             this.checkBox_EcoGine.Name = "checkBox_EcoGine";
             this.checkBox_EcoGine.Size = new System.Drawing.Size(193, 17);
-            this.checkBox_EcoGine.TabIndex = 27;
+            this.checkBox_EcoGine.TabIndex = 28;
             this.checkBox_EcoGine.Tag = "";
             this.checkBox_EcoGine.Text = "Ecografía ginecológica / obstétrica";
             this.checkBox_EcoGine.UseVisualStyleBackColor = true;
@@ -606,7 +612,7 @@ namespace Femecon_2_0
             this.checkBox_EcoTiroides.Location = new System.Drawing.Point(3, 210);
             this.checkBox_EcoTiroides.Name = "checkBox_EcoTiroides";
             this.checkBox_EcoTiroides.Size = new System.Drawing.Size(109, 17);
-            this.checkBox_EcoTiroides.TabIndex = 28;
+            this.checkBox_EcoTiroides.TabIndex = 29;
             this.checkBox_EcoTiroides.Tag = "";
             this.checkBox_EcoTiroides.Text = "Ecografía tiroides";
             this.checkBox_EcoTiroides.UseVisualStyleBackColor = true;
@@ -617,7 +623,7 @@ namespace Femecon_2_0
             this.checkBox_EcoAbdominal.Location = new System.Drawing.Point(3, 233);
             this.checkBox_EcoAbdominal.Name = "checkBox_EcoAbdominal";
             this.checkBox_EcoAbdominal.Size = new System.Drawing.Size(124, 17);
-            this.checkBox_EcoAbdominal.TabIndex = 29;
+            this.checkBox_EcoAbdominal.TabIndex = 30;
             this.checkBox_EcoAbdominal.Tag = "";
             this.checkBox_EcoAbdominal.Text = "Ecografía abdominal";
             this.checkBox_EcoAbdominal.UseVisualStyleBackColor = true;
@@ -628,7 +634,7 @@ namespace Femecon_2_0
             this.checkBox_EcoHepato.Location = new System.Drawing.Point(216, 3);
             this.checkBox_EcoHepato.Name = "checkBox_EcoHepato";
             this.checkBox_EcoHepato.Size = new System.Drawing.Size(130, 17);
-            this.checkBox_EcoHepato.TabIndex = 32;
+            this.checkBox_EcoHepato.TabIndex = 33;
             this.checkBox_EcoHepato.Tag = "";
             this.checkBox_EcoHepato.Text = "Ecografía hepatobiliar";
             this.checkBox_EcoHepato.UseVisualStyleBackColor = true;
@@ -639,7 +645,7 @@ namespace Femecon_2_0
             this.checkBox_EcoVesical.Location = new System.Drawing.Point(3, 279);
             this.checkBox_EcoVesical.Name = "checkBox_EcoVesical";
             this.checkBox_EcoVesical.Size = new System.Drawing.Size(166, 17);
-            this.checkBox_EcoVesical.TabIndex = 31;
+            this.checkBox_EcoVesical.TabIndex = 32;
             this.checkBox_EcoVesical.Tag = "";
             this.checkBox_EcoVesical.Text = "Ecografía vesical / prostática";
             this.checkBox_EcoVesical.UseVisualStyleBackColor = true;
@@ -650,7 +656,7 @@ namespace Femecon_2_0
             this.checkBox_EcoRenal.Location = new System.Drawing.Point(3, 256);
             this.checkBox_EcoRenal.Name = "checkBox_EcoRenal";
             this.checkBox_EcoRenal.Size = new System.Drawing.Size(99, 17);
-            this.checkBox_EcoRenal.TabIndex = 30;
+            this.checkBox_EcoRenal.TabIndex = 31;
             this.checkBox_EcoRenal.Tag = "";
             this.checkBox_EcoRenal.Text = "Ecografía renal";
             this.checkBox_EcoRenal.UseVisualStyleBackColor = true;
@@ -661,7 +667,7 @@ namespace Femecon_2_0
             this.checkBox_EcoAmbasCaderas.Location = new System.Drawing.Point(216, 26);
             this.checkBox_EcoAmbasCaderas.Name = "checkBox_EcoAmbasCaderas";
             this.checkBox_EcoAmbasCaderas.Size = new System.Drawing.Size(148, 17);
-            this.checkBox_EcoAmbasCaderas.TabIndex = 33;
+            this.checkBox_EcoAmbasCaderas.TabIndex = 34;
             this.checkBox_EcoAmbasCaderas.Tag = "";
             this.checkBox_EcoAmbasCaderas.Text = "Ecografía ambas caderas";
             this.checkBox_EcoAmbasCaderas.UseVisualStyleBackColor = true;
@@ -672,7 +678,7 @@ namespace Femecon_2_0
             this.checkBox_EcoCerebral.Location = new System.Drawing.Point(216, 95);
             this.checkBox_EcoCerebral.Name = "checkBox_EcoCerebral";
             this.checkBox_EcoCerebral.Size = new System.Drawing.Size(114, 17);
-            this.checkBox_EcoCerebral.TabIndex = 36;
+            this.checkBox_EcoCerebral.TabIndex = 37;
             this.checkBox_EcoCerebral.Tag = "";
             this.checkBox_EcoCerebral.Text = "Ecografía cerebral";
             this.checkBox_EcoCerebral.UseVisualStyleBackColor = true;
@@ -683,7 +689,7 @@ namespace Femecon_2_0
             this.checkBox_EcoTesticular.Location = new System.Drawing.Point(216, 49);
             this.checkBox_EcoTesticular.Name = "checkBox_EcoTesticular";
             this.checkBox_EcoTesticular.Size = new System.Drawing.Size(118, 17);
-            this.checkBox_EcoTesticular.TabIndex = 34;
+            this.checkBox_EcoTesticular.TabIndex = 35;
             this.checkBox_EcoTesticular.Tag = "";
             this.checkBox_EcoTesticular.Text = "Ecografía testicular";
             this.checkBox_EcoTesticular.UseVisualStyleBackColor = true;
@@ -694,7 +700,7 @@ namespace Femecon_2_0
             this.checkBox_EcoPartesBlandas.Location = new System.Drawing.Point(216, 72);
             this.checkBox_EcoPartesBlandas.Name = "checkBox_EcoPartesBlandas";
             this.checkBox_EcoPartesBlandas.Size = new System.Drawing.Size(145, 17);
-            this.checkBox_EcoPartesBlandas.TabIndex = 35;
+            this.checkBox_EcoPartesBlandas.TabIndex = 36;
             this.checkBox_EcoPartesBlandas.Tag = "";
             this.checkBox_EcoPartesBlandas.Text = "Ecografía partes blandas";
             this.checkBox_EcoPartesBlandas.UseVisualStyleBackColor = true;
@@ -717,7 +723,7 @@ namespace Femecon_2_0
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_mamografia);
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_prolongacion);
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_Magnificacion);
-            this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox2);
+            this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_MagnificacionBilateral);
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_Dmo1Reg);
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_Dmo2Reg);
             this.flowLayoutPanel_Ecografia.Controls.Add(this.checkBox_EcoGine);
@@ -736,6 +742,17 @@ namespace Femecon_2_0
             this.flowLayoutPanel_Ecografia.Name = "flowLayoutPanel_Ecografia";
             this.flowLayoutPanel_Ecografia.Size = new System.Drawing.Size(574, 304);
             this.flowLayoutPanel_Ecografia.TabIndex = 93;
+            // 
+            // checkBox_MagnificacionBilateral
+            // 
+            this.checkBox_MagnificacionBilateral.AutoSize = true;
+            this.checkBox_MagnificacionBilateral.Location = new System.Drawing.Point(3, 118);
+            this.checkBox_MagnificacionBilateral.Name = "checkBox_MagnificacionBilateral";
+            this.checkBox_MagnificacionBilateral.Size = new System.Drawing.Size(201, 17);
+            this.checkBox_MagnificacionBilateral.TabIndex = 25;
+            this.checkBox_MagnificacionBilateral.Tag = "";
+            this.checkBox_MagnificacionBilateral.Text = "Magnificación / Focalización bilateral";
+            this.checkBox_MagnificacionBilateral.UseVisualStyleBackColor = true;
             // 
             // tabControl_Estudios
             // 
@@ -1491,13 +1508,13 @@ namespace Femecon_2_0
             this.listView_PracticasSeleccionadas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader_PracticasSeleccionadas,
             this.columnHeader_Cantidad});
-            listViewGroup1.Header = "Ecografía";
-            listViewGroup1.Name = "listViewGroup_Eco";
-            listViewGroup2.Header = "Radiología";
-            listViewGroup2.Name = "listViewGroup_Rx";
+            listViewGroup7.Header = "Ecografía";
+            listViewGroup7.Name = "listViewGroup_Eco";
+            listViewGroup8.Header = "Radiología";
+            listViewGroup8.Name = "listViewGroup_Rx";
             this.listView_PracticasSeleccionadas.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2});
+            listViewGroup7,
+            listViewGroup8});
             this.listView_PracticasSeleccionadas.HideSelection = false;
             this.listView_PracticasSeleccionadas.Location = new System.Drawing.Point(269, 30);
             this.listView_PracticasSeleccionadas.Name = "listView_PracticasSeleccionadas";
@@ -1608,20 +1625,56 @@ namespace Femecon_2_0
             this.printButton.UseVisualStyleBackColor = true;
             this.printButton.Click += new System.EventHandler(this.printButton_Click);
             // 
+            // button_agregarPaciente
+            // 
+            this.button_agregarPaciente.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button_agregarPaciente.BackgroundImage")));
+            this.button_agregarPaciente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_agregarPaciente.Enabled = false;
+            this.button_agregarPaciente.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.button_agregarPaciente.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.button_agregarPaciente.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.button_agregarPaciente.Location = new System.Drawing.Point(453, 230);
+            this.button_agregarPaciente.Name = "button_agregarPaciente";
+            this.button_agregarPaciente.Size = new System.Drawing.Size(23, 23);
+            this.button_agregarPaciente.TabIndex = 9;
+            this.toolTip_Practicas.SetToolTip(this.button_agregarPaciente, "Agregar paciente a listado");
+            this.button_agregarPaciente.UseVisualStyleBackColor = true;
+            this.button_agregarPaciente.Click += new System.EventHandler(this.button_agregarPaciente_Click);
+            // 
             // printDialog
             // 
             this.printDialog.UseEXDialog = true;
             // 
-            // checkBox2
+            // listadoToolStripMenuItem
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(3, 118);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(201, 17);
-            this.checkBox2.TabIndex = 37;
-            this.checkBox2.Tag = "";
-            this.checkBox2.Text = "Magnificación / Focalización bilateral";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.listadoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verListadoActualToolStripMenuItem,
+            this.guardarListadoActualToolStripMenuItem,
+            this.abrirListadojsonToolStripMenuItem});
+            this.listadoToolStripMenuItem.Name = "listadoToolStripMenuItem";
+            this.listadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listadoToolStripMenuItem.Text = "Listado";
+            // 
+            // verListadoActualToolStripMenuItem
+            // 
+            this.verListadoActualToolStripMenuItem.Name = "verListadoActualToolStripMenuItem";
+            this.verListadoActualToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verListadoActualToolStripMenuItem.Text = "Ver listado actual";
+            this.verListadoActualToolStripMenuItem.Click += new System.EventHandler(this.verListadoActualToolStripMenuItem_Click);
+            // 
+            // abrirListadojsonToolStripMenuItem
+            // 
+            this.abrirListadojsonToolStripMenuItem.Name = "abrirListadojsonToolStripMenuItem";
+            this.abrirListadojsonToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirListadojsonToolStripMenuItem.Text = "Abrir listado (*.json)";
+            this.abrirListadojsonToolStripMenuItem.Click += new System.EventHandler(this.abrirListadojsonToolStripMenuItem_Click);
+            // 
+            // guardarListadoActualToolStripMenuItem
+            // 
+            this.guardarListadoActualToolStripMenuItem.Name = "guardarListadoActualToolStripMenuItem";
+            this.guardarListadoActualToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.guardarListadoActualToolStripMenuItem.Text = "Exportar listado actual";
+            this.guardarListadoActualToolStripMenuItem.Click += new System.EventHandler(this.guardarListadoActualToolStripMenuItem_Click);
             // 
             // Form_principal
             // 
@@ -1629,6 +1682,7 @@ namespace Femecon_2_0
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(594, 641);
+            this.Controls.Add(this.button_agregarPaciente);
             this.Controls.Add(this.printButton);
             this.Controls.Add(this.button_Restablecer);
             this.Controls.Add(this.flowLayoutPanel_Afiliado);
@@ -1647,8 +1701,9 @@ namespace Femecon_2_0
             this.Controls.Add(this.flowLayoutPanel_RadioButtons);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(610, 680);
+            this.MinimumSize = new System.Drawing.Size(610, 680);
             this.Name = "Form_principal";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Femecon";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_principal_FormClosing);
             this.Load += new System.EventHandler(this.Form_principal_Load);
@@ -1857,6 +1912,11 @@ namespace Femecon_2_0
         private System.Windows.Forms.ToolStripMenuItem imprimirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printValidacionDelAfiliadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem certificacionAfiliatoriaToolStripMenuItem;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox_MagnificacionBilateral;
+        private System.Windows.Forms.Button button_agregarPaciente;
+        private System.Windows.Forms.ToolStripMenuItem listadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verListadoActualToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abrirListadojsonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem guardarListadoActualToolStripMenuItem;
     }
 }

@@ -5,24 +5,9 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Femecon", "Femecon.csproj", "{589D2E19-B5FA-4571-87CE-61763F0916EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "..\Updater\Updater.csproj", "{C60B93B5-39C4-4242-8B97-AD11F0EA34A5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libs", "..\libs\Libs.csproj", "{97301A5B-763F-4EDD-AA9C-9F7B9725339F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater_installer", "..\Updater_installer\Updater_installer.csproj", "{31B19E1F-CC4F-4DF7-B4F2-EDE6BEA3E665}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChromeDriver", "..\ChromeDriver\ChromeDriver.csproj", "{5FE37359-C5D8-4C22-BFD8-C5DED0A656A0}"
-	ProjectSection(ProjectDependencies) = postProject
-		{97301A5B-763F-4EDD-AA9C-9F7B9725339F} = {97301A5B-763F-4EDD-AA9C-9F7B9725339F}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "..\Data\Data.csproj", "{B111EA60-1FFF-4A46-A800-66A692DEB5F9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlAutorizaciones", "..\ControlAutorizaciones\ControlAutorizaciones.csproj", "{A14A48B7-25E4-4836-85EF-25BCA8EFEF63}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5FE37359-C5D8-4C22-BFD8-C5DED0A656A0} = {5FE37359-C5D8-4C22-BFD8-C5DED0A656A0}
-		{97301A5B-763F-4EDD-AA9C-9F7B9725339F} = {97301A5B-763F-4EDD-AA9C-9F7B9725339F}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,18 +19,6 @@ Global
 		{589D2E19-B5FA-4571-87CE-61763F0916EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{589D2E19-B5FA-4571-87CE-61763F0916EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{589D2E19-B5FA-4571-87CE-61763F0916EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C60B93B5-39C4-4242-8B97-AD11F0EA34A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C60B93B5-39C4-4242-8B97-AD11F0EA34A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C60B93B5-39C4-4242-8B97-AD11F0EA34A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C60B93B5-39C4-4242-8B97-AD11F0EA34A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{97301A5B-763F-4EDD-AA9C-9F7B9725339F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97301A5B-763F-4EDD-AA9C-9F7B9725339F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97301A5B-763F-4EDD-AA9C-9F7B9725339F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97301A5B-763F-4EDD-AA9C-9F7B9725339F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31B19E1F-CC4F-4DF7-B4F2-EDE6BEA3E665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31B19E1F-CC4F-4DF7-B4F2-EDE6BEA3E665}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31B19E1F-CC4F-4DF7-B4F2-EDE6BEA3E665}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31B19E1F-CC4F-4DF7-B4F2-EDE6BEA3E665}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5FE37359-C5D8-4C22-BFD8-C5DED0A656A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5FE37359-C5D8-4C22-BFD8-C5DED0A656A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FE37359-C5D8-4C22-BFD8-C5DED0A656A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,10 +27,6 @@ Global
 		{B111EA60-1FFF-4A46-A800-66A692DEB5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B111EA60-1FFF-4A46-A800-66A692DEB5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B111EA60-1FFF-4A46-A800-66A692DEB5F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A14A48B7-25E4-4836-85EF-25BCA8EFEF63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A14A48B7-25E4-4836-85EF-25BCA8EFEF63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A14A48B7-25E4-4836-85EF-25BCA8EFEF63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A14A48B7-25E4-4836-85EF-25BCA8EFEF63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -60,7 +60,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>key.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack, Version=1.11.46.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
@@ -69,6 +70,8 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -77,6 +80,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,16 +90,33 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WebDriver, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Selenium.WebDriver.4.5.1\lib\net47\WebDriver.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\DataGridViewProgressCell.cs" />
+    <Compile Include="Clases\DataGridViewProgressColumn.cs" />
     <Compile Include="Form_autorizaciones.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_autorizaciones.Designer.cs">
       <DependentUpon>Form_autorizaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_listaPacientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_listaPacientes.Designer.cs">
+      <DependentUpon>Form_listaPacientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_detallesPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_detallesPaciente.Designer.cs">
+      <DependentUpon>Form_detallesPaciente.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_principal.cs">
       <SubType>Form</SubType>
@@ -103,7 +124,7 @@
     <Compile Include="Form_principal.Designer.cs">
       <DependentUpon>Form_principal.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConexionIoma.cs" />
+    <Compile Include="Clases\ConexionIoma.cs" />
     <Compile Include="Form_progresoAutorizacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +135,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_autorizaciones.resx">
       <DependentUpon>Form_autorizaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_listaPacientes.resx">
+      <DependentUpon>Form_listaPacientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_detallesPaciente.resx">
+      <DependentUpon>Form_detallesPaciente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_principal.resx">
       <DependentUpon>Form_principal.cs</DependentUpon>
@@ -131,8 +158,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="key.pfx" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Data.Paciente.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -155,18 +182,6 @@
       <Project>{b111ea60-1fff-4a46-a800-66a692deb5f9}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\libs\Libs.csproj">
-      <Project>{97301a5b-763f-4edd-aa9c-9f7b9725339f}</Project>
-      <Name>Libs</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Updater\Updater.csproj">
-      <Project>{c60b93b5-39c4-4242-8b97-ad11f0ea34a5}</Project>
-      <Name>Updater</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Updater_installer\Updater_installer.csproj">
-      <Project>{31b19e1f-cc4f-4df7-b4f2-ede6bea3e665}</Project>
-      <Name>Updater_installer</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -183,7 +198,6 @@
   <ItemGroup>
     <Content Include="icono.ico" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

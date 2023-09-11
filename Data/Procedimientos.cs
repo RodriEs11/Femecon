@@ -1,11 +1,14 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Data
 {
@@ -318,6 +321,149 @@ namespace Data
 
             return codigo;
         }
+
+        public static Paciente jsonToPacienteFromJsonPath(string jsonPath) {
+
+            string jsonString = leerArchivo(jsonPath);
+
+
+            return JsonConvert.DeserializeObject<Paciente>(jsonString);
+                
+        }
+
+        public static List<Paciente> jsonToPacientesFromJsonPath(string jsonPath) {
+            
+            Lista listaPracticas = new Lista().cargarListadoDePracticasJson();
+            
+            string jsonString = leerArchivo(jsonPath);
+            List<Paciente> pacientes = JsonConvert.DeserializeObject<List<Paciente>>(jsonString);
+
+            foreach (var paciente in pacientes) {
+
+                List<Practica> listaPracticasTemp = new List<Practica>();
+
+                foreach (var practica in paciente.practicasParaAutorizar) {
+
+                    Practica practicaTemp;
+                    //DISTINGUE MAMOGRAFIA MAGNIFICADA UNILATERAL O BILATERAL 
+                    if (practica.codigo == 883403 && practica.cantidad == 2)
+                    {
+                        practicaTemp = listaPracticas.traerPracticaPorNombre(practica.nombre).Clone();
+                    }
+                    else {
+                        practicaTemp = listaPracticas.traerPracticaPorCodigoEcografia(practica.codigo).Clone();
+
+                    }
+
+                   
+                    practicaTemp.codigoDx = practica.codigoDx;
+                    practicaTemp.cantidad = practica.cantidad;
+                    practicaTemp.matricula = practica.matricula;
+                    practicaTemp.codigoAutorizacion = practica.codigoAutorizacion;
+
+
+                    listaPracticasTemp.Add(practicaTemp);
+                 
+                }
+
+                paciente.practicasParaAutorizar.Clear();
+                paciente.practicasParaAutorizar = listaPracticasTemp;
+
+
+            }
+
+
+            return pacientes;
+
+        }
+
+        public static string getJson(List<Paciente> pacientes) {
+
+           
+            return JsonConvert.SerializeObject(pacientes);
+        }
+
+        public static string leerArchivo(string path) { 
+        
+            return File.ReadAllText(path);
+            
+        }
+
+        public static string exportPacienteToTxt(Paciente paciente) {
+
+            string nombreCompleto = $"{paciente.nombre} {paciente.apellido}";
+            string epo = $"{paciente.epo}";
+            string numeroAfiliado = $"{paciente.numeroAfiliado}";
+            string practicas = "";
+
+            foreach (Practica practica in paciente.practicasParaAutorizar)
+            {
+                practicas += $"{practica.nombreGuardadoEnArchivos}{practica.codigoAutorizacion}\n";
+
+            }
+
+            return $"{nombreCompleto}" +
+                    $"\n{epo}" +
+                    $"\n{numeroAfiliado}" +
+                    $"\n{practicas}\n";
+            }
+
+
+
+        public static bool guardarListaPacientesEnArchivo(List<Paciente> pacientes)
+        {
+
+            //string hora = DateTime.Now.ToString("ddMMyyyy_HHmmss");
+            bool archivoListadoPacientesGuardado = false;
+
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Guardar archivo";
+            saveFileDialog.FileName = "Pacientes";
+            saveFileDialog.Filter = "Archivo de texto (*.txt)|*.txt|Archivo json (*.json)|*.json";
+            saveFileDialog.DefaultExt = "txt";
+            saveFileDialog.AddExtension = true;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+                string fileExtension = Path.GetExtension(filePath);
+
+                if (fileExtension == ".txt")
+                {
+
+                    string txt = "";
+                    foreach (Paciente paciente in pacientes)
+                    {
+                     
+
+                        txt = $"{txt}{Procedimientos.exportPacienteToTxt(paciente)}";
+
+                    }
+
+                    File.WriteAllText(filePath, txt);
+                    archivoListadoPacientesGuardado = true;
+                 
+                }
+
+                if (fileExtension == ".json")
+                {
+
+                    File.WriteAllText(filePath, Procedimientos.getJson(pacientes));
+                    archivoListadoPacientesGuardado = true;
+
+                }
+
+
+            }
+
+            if (archivoListadoPacientesGuardado) {
+                MessageBox.Show("Archivo guardado", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            return archivoListadoPacientesGuardado;
+        }
+
 
     }
 

@@ -1,6 +1,4 @@
-﻿using Libs;
-
-
+﻿
 namespace Data
 {
     public class Configuracion

@@ -1,6 +1,7 @@
 ﻿using Data;
 using Femecon;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
@@ -15,14 +16,16 @@ namespace Femecon_2_0
     public partial class Form_principal : Form
     {
         Lista listaPracticas = new Lista().cargarListadoDePracticasJson();
+        List<Paciente> listaPacientes = new List<Paciente>();
         Paciente paciente = Paciente.getInstance();
+        ChromeDriver driver = new ChromeDriver();
         bool chromeDriverActualizado = false;
 
         public Form_principal()
         {
             InitializeComponent();
         }
-
+        
         private void Form_principal_Load(object sender, EventArgs e)
         {
 
@@ -560,7 +563,7 @@ namespace Femecon_2_0
                 try
                 {
 
-                    ChromeDriver driver = new ChromeDriver();
+                   
                     //Realiza el prin unicamente en headless mode
                     driver.setup(false);
                     driver.descargarValidacionPDF(paciente);
@@ -649,6 +652,72 @@ namespace Femecon_2_0
             return clinica;
         }
 
+        private void button_agregarPaciente_Click(object sender, EventArgs e)
+        {
+            bool afiliadoValidado = validarAfiliado();
+            bool practicasValidado = validarPracticas();
+            bool matriculaValidado = validarMatricula();
+            bool radioButtonsValidado = validarRadioButtons();
+            //bool partidoValidado = validarPartido();
+            //bool pacienteActivoValidado = validarPacienteActivo();
+
+
+            bool variablesValidadas = afiliadoValidado && practicasValidado && matriculaValidado && radioButtonsValidado;
+
+            if (variablesValidadas)
+            {
+
+
+                if (paciente.clinica == null || paciente.clinica.Equals(""))
+                {
+
+                    paciente.clinica = obtenerClinicaSegunRadioButton();
+
+                }
+
+                if (paciente.numeroAfiliado == null || paciente.numeroAfiliado.Equals(""))
+                {
+
+                    paciente.numeroAfiliado = textBox_Afiliado.Text;
+
+                }
+
+
+                string listadoPracticas = obtenerListadoDePracticasPorAutorizar();
+
+
+                string mensaje = $"Está por agregar al listado el paciente\n\n{paciente.nombre} {paciente.apellido}\n\nPrácticas\n{listadoPracticas}\n¿Desea continuar?";
+
+
+                DialogResult opcion = MessageBox.Show(mensaje, "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (opcion == DialogResult.Yes)
+                {
+
+                    paciente.practicasParaAutorizar.Sort();
+                    foreach (Practica practica in paciente.practicasParaAutorizar)
+                    {
+
+                        if (!practica.matriculaModificada)
+                        {
+                            practica.matricula = textBox_Matricula.Text;
+                        }
+
+
+                    }
+
+                    Paciente pacienteTemp = new Paciente();
+                    pacienteTemp.restaurarDesde(paciente);
+                    listaPacientes.Add(pacienteTemp);
+
+                    MessageBox.Show("Paciente agregado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    button_Restablecer.PerformClick();
+
+                }
+
+            }
+
+        }
         private void button_Autorizar_Click(object sender, EventArgs e)
         {
 
@@ -708,7 +777,7 @@ namespace Femecon_2_0
 
                     }
 
-                    Form_progresoAutorizacion autorizar = new Form_progresoAutorizacion();
+                    Form_progresoAutorizacion autorizar = new Form_progresoAutorizacion(paciente);
                     autorizar.ShowDialog();
 
                 }
@@ -760,6 +829,7 @@ namespace Femecon_2_0
             label_AfiliadoInactivo.Visible = false;
 
             printButton.Enabled = false;
+            button_agregarPaciente.Enabled = false;
             printValidacionDelAfiliadoToolStripMenuItem.Enabled = false;
 
             certificacionAfiliatoriaToolStripMenuItem.Enabled = false;
@@ -968,6 +1038,7 @@ namespace Femecon_2_0
                 setearRadioButtons();
 
                 printButton.Enabled = true;
+                button_agregarPaciente.Enabled = true;  
                 printValidacionDelAfiliadoToolStripMenuItem.Enabled = true;
 
                 if (paciente.activo) {
@@ -1128,7 +1199,7 @@ namespace Femecon_2_0
         private void guardarFechaDeNacimiento(Paciente paciente)
         {
 
-            ChromeDriver driver = new ChromeDriver();
+           
 
             driver.setup(Configuracion.mostrarNavegadorChromeDriver);
             paciente.fechaDeNacimiento = driver.obtenerFechaDeNacimiento(paciente);
@@ -1139,7 +1210,7 @@ namespace Femecon_2_0
         private void abrirVentanaCertificacionAfiliatoria(Paciente paciente)
         {
 
-            ChromeDriver driver = new ChromeDriver();
+            
             driver.setup(true);
             driver.abrirYConfigurarCertificacionAfiliatoria(paciente);
         }
@@ -1151,6 +1222,7 @@ namespace Femecon_2_0
             button_Autorizar.PerformClick();
         }
 
+
         private void verAutorizacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             button_VerAutorizaciones.PerformClick();
@@ -1159,6 +1231,39 @@ namespace Femecon_2_0
         private void restablecerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             button_Restablecer.PerformClick();
+        }
+        private void abrirListadojsonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_listaPacientes autorizarListado = new Form_listaPacientes();
+            autorizarListado.ShowDialog();
+        }
+
+        private void guardarListadoActualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listaPacientes.Count > 0)
+            {
+                bool guardado = Procedimientos.guardarListaPacientesEnArchivo(listaPacientes);
+                
+
+            }
+            else {
+                MessageBox.Show("No hay pacientes agregados a la lista", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+           
+        }
+
+        private void verListadoActualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listaPacientes.Count > 0)
+            {
+                Form_listaPacientes autorizarListado = new Form_listaPacientes(listaPacientes);
+                autorizarListado.ShowDialog();
+            }
+            else {
+                MessageBox.Show("No hay pacientes agregados a la lista", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+          
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1269,13 +1374,13 @@ namespace Femecon_2_0
         }
         public void validarChromeDriver(bool mostrarMensaje) {
 
-            ChromeDriver chromeDriver = new ChromeDriver();
+           
 
             try
             {
 
-                chromeDriver.validarVersion();
-                chromeDriver.salir();
+                driver.validarVersion();
+                driver.salir();
                 chromeDriverActualizado = true;
 
             }
@@ -1319,5 +1424,6 @@ namespace Femecon_2_0
 
         }
 
+        
     }
 }

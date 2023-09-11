@@ -39,6 +39,7 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Configuracion.cs" />
     <Compile Include="Constantes.cs" />
+    <Compile Include="Credenciales.cs" />
+    <Compile Include="FileLibrary.cs" />
     <Compile Include="Lista.cs" />
     <Compile Include="Paciente.cs" />
     <Compile Include="Practica.cs" />
@@ -58,12 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\libs\Libs.csproj">
-      <Project>{97301a5b-763f-4edd-aa9c-9f7b9725339f}</Project>
-      <Name>Libs</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
