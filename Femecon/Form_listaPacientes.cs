@@ -304,20 +304,23 @@ namespace Femecon
 
             for (int rowIndex = 0; rowIndex < dataGridView_pacientes.Rows.Count; rowIndex++)
             {
+                this.Cursor = Cursors.AppStarting;
+
                 Paciente paciente = (Paciente)dataGridView_pacientes.Rows[rowIndex].DataBoundItem;
 
                 if (!tienePracticasAutorizadas(paciente)) {
 
                     bool resultado = await autorizarAsync(paciente, rowIndex);
+                    
                 }
               
-
+                
                        
             }
 
 
             // FINALIZA EL PROCESO
-
+            this.Cursor = Cursors.Default;
             button_guardar.Enabled = true;
             button_salir.Enabled = true;
             dataGridView_pacientes.Columns["copiar"].Visible = true;
