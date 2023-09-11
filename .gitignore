@@ -43,4 +43,3 @@
 *.vsidx
 /ControlAutorizaciones
 /libs/Credenciales.cs
-/Data/Credenciales.cs
