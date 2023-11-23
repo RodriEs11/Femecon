@@ -1,10 +1,14 @@
 ﻿using Data;
 using libs;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 
 
@@ -12,6 +16,8 @@ public class ChromeDriver
 {
 
     private OpenQA.Selenium.Chrome.ChromeDriver driver;
+    private string versionBaseChrome;
+    private string versionBaseChromeDriver;
     Configuracion configuracion = Configuracion.getInstance();
 
     public ChromeDriver()
@@ -33,6 +39,11 @@ public class ChromeDriver
         }
 
         driver = new OpenQA.Selenium.Chrome.ChromeDriver(driverService, options);
+
+        // Obtener Version Base de Chrome y ChromeDriver
+        versionBaseChrome = Procedimientos.obtenerVersionBase(driver.Capabilities.GetCapability("browserVersion").ToString());
+        Dictionary<string, object> capabilities = (Dictionary<string, object>)driver.Capabilities.GetCapability("chrome");
+        versionBaseChromeDriver = Procedimientos.obtenerVersionBase(capabilities["chromedriverVersion"].ToString());
 
     }
 
@@ -224,13 +235,21 @@ public class ChromeDriver
 
     public bool validarVersion()
     {
-        bool validado;
+        bool validado = true;
 
         try
         {
             this.setup(Configuracion.mostrarNavegadorChromeDriver);
+       
             this.salir();
-            validado = true;
+
+            // Las versiones base de Chrome y el ChromeDriver debe ser iguales
+            if ( !(versionBaseChrome == versionBaseChromeDriver) ) {
+                validado = false;
+                throw new Exception("Las versiones del Chrome Driver y el Navegador no coinciden");
+            }
+          
+            
         }
         catch (Exception)
         {
