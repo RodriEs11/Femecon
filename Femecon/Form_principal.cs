@@ -1130,7 +1130,7 @@ namespace Femecon_2_0
 
             ChromeDriver driver = new ChromeDriver();
 
-            driver.setup(true);
+            driver.setup(Configuracion.mostrarNavegadorChromeDriver);
             paciente.fechaDeNacimiento = driver.obtenerFechaDeNacimiento(paciente);
             driver.salir();
 
