@@ -282,15 +282,15 @@ public class ChromeDriver
 
         driver.Url = Rutas.URL_IOMA_PADRON_AFILIADO;
 
-        IWebElement textBoxAfiliado = driver.FindElement(By.XPath("/html/body/table/tbody/tr/td/table[2]/tbody/tr/td/form/div/p[1]/input"));
-        IWebElement buttonBuscar = driver.FindElement(By.XPath("/html/body/table/tbody/tr/td/table[2]/tbody/tr/td/form/div/p[2]/input[1]"));
+        IWebElement textBoxAfiliado = driver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/form/div/div[1]/div/input"));
+        IWebElement buttonBuscar = driver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/form/fieldset/div[2]/button[1]"));
 
         textBoxAfiliado.Clear();
         textBoxAfiliado.SendKeys(paciente.numeroAfiliado);
 
         buttonBuscar.Submit();
 
-        IWebElement textFechaNacimiento = driver.FindElement(By.XPath("/html/body/div[2]/div/span[12]"));
+        IWebElement textFechaNacimiento = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/div/div/div[6]/span[2]"));
 
         //EJ. DEVUELVE 13-Jun-1947
         return Procedimientos.parseToDateTime(textFechaNacimiento.Text);
