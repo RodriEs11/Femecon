@@ -99,7 +99,14 @@ namespace Data
             return fileVersionInfo.FileVersion;
 
         }
+        public static string obtenerVersionBase(string versionCompleta) {
 
+            string[] temp = versionCompleta.Split('.');
+            string versionBase = temp[0];
+
+
+            return versionBase;
+        }
         public static string obtenerVersionBaseChrome() {
 
             string versionCompleta = obtenerVersionActualChrome();

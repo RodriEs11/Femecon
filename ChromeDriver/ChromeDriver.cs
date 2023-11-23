@@ -1,10 +1,14 @@
 ﻿using Data;
 using libs;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 
 
@@ -12,6 +16,8 @@ public class ChromeDriver
 {
 
     private OpenQA.Selenium.Chrome.ChromeDriver driver;
+    private string versionBaseChrome;
+    private string versionBaseChromeDriver;
     Configuracion configuracion = Configuracion.getInstance();
 
     public ChromeDriver()
@@ -33,6 +39,11 @@ public class ChromeDriver
         }
 
         driver = new OpenQA.Selenium.Chrome.ChromeDriver(driverService, options);
+
+        // Obtener Version Base de Chrome y ChromeDriver
+        versionBaseChrome = Procedimientos.obtenerVersionBase(driver.Capabilities.GetCapability("browserVersion").ToString());
+        Dictionary<string, object> capabilities = (Dictionary<string, object>)driver.Capabilities.GetCapability("chrome");
+        versionBaseChromeDriver = Procedimientos.obtenerVersionBase(capabilities["chromedriverVersion"].ToString());
 
     }
 
@@ -224,13 +235,21 @@ public class ChromeDriver
 
     public bool validarVersion()
     {
-        bool validado;
+        bool validado = true;
 
         try
         {
             this.setup(Configuracion.mostrarNavegadorChromeDriver);
+       
             this.salir();
-            validado = true;
+
+            // Las versiones base de Chrome y el ChromeDriver debe ser iguales
+            if ( !(versionBaseChrome == versionBaseChromeDriver) ) {
+                validado = false;
+                throw new Exception("Las versiones del Chrome Driver y el Navegador no coinciden");
+            }
+          
+            
         }
         catch (Exception)
         {
@@ -263,15 +282,15 @@ public class ChromeDriver
 
         driver.Url = Rutas.URL_IOMA_PADRON_AFILIADO;
 
-        IWebElement textBoxAfiliado = driver.FindElement(By.XPath("/html/body/table/tbody/tr/td/table[2]/tbody/tr/td/form/div/p[1]/input"));
-        IWebElement buttonBuscar = driver.FindElement(By.XPath("/html/body/table/tbody/tr/td/table[2]/tbody/tr/td/form/div/p[2]/input[1]"));
+        IWebElement textBoxAfiliado = driver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/form/div/div[1]/div/input"));
+        IWebElement buttonBuscar = driver.FindElement(By.XPath("/html/body/div[2]/div[2]/div/form/fieldset/div[2]/button[1]"));
 
         textBoxAfiliado.Clear();
         textBoxAfiliado.SendKeys(paciente.numeroAfiliado);
 
         buttonBuscar.Submit();
 
-        IWebElement textFechaNacimiento = driver.FindElement(By.XPath("/html/body/div[2]/div/span[12]"));
+        IWebElement textFechaNacimiento = driver.FindElement(By.XPath("/html/body/div[2]/div[1]/div/div/div[6]/span[2]"));
 
         //EJ. DEVUELVE 13-Jun-1947
         return Procedimientos.parseToDateTime(textFechaNacimiento.Text);

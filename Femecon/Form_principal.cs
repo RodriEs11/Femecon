@@ -1274,9 +1274,9 @@ namespace Femecon_2_0
             try
             {
 
-                chromeDriver.validarVersion();
+                chromeDriverActualizado = chromeDriver.validarVersion();
                 chromeDriver.salir();
-                chromeDriverActualizado = true;
+                
 
             }
             catch (Exception e)
