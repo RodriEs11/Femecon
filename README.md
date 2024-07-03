@@ -5,4 +5,7 @@
 ```
 Update-Package
 ```
+# Interfaz gráfica
+
+![Interfaz](https://i.imgur.com/Wiu8ms6.png)
 
