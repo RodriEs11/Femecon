@@ -32,6 +32,7 @@ public class ChromeDriver
         driverService.HideCommandPromptWindow = true;
         ChromeOptions options = new ChromeOptions();
 
+        options.AddArgument("--disable-infobars");
         
         if (!mostrarVentana) {
 
