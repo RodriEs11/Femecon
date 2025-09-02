@@ -31,8 +31,9 @@ public class ChromeDriver
         ChromeDriverService driverService = ChromeDriverService.CreateDefaultService(Rutas.LOCAL_APPDATA);
         driverService.HideCommandPromptWindow = true;
         ChromeOptions options = new ChromeOptions();
-
-        options.AddArgument("--disable-infobars");
+        
+        options.AddUserProfilePreference("profile.password_manager_leak_detection", false);
+        options.AddUserProfilePreference("credentials_enable_service", false);
         
         if (!mostrarVentana) {
 
