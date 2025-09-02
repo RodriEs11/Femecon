@@ -42,3 +42,8 @@
 *.cache
 *.vsidx
 /ControlAutorizaciones
+/ChromeDriver/.vs
+/Femecon/.vs
+/Data/.vs
+/Updater/.vs
+/Updater_installer/.vs
