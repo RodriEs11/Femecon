@@ -84,6 +84,7 @@ namespace Femecon_2_0
             this.checkBox_EcoPartesBlandas = new System.Windows.Forms.CheckBox();
             this.tabPage_Ecografia = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel_Ecografia = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.tabControl_Estudios = new System.Windows.Forms.TabControl();
             this.tabPage_Rayos = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel_Rx = new System.Windows.Forms.FlowLayoutPanel();
@@ -158,7 +159,6 @@ namespace Femecon_2_0
             this.toolTip_Practicas = new System.Windows.Forms.ToolTip(this.components);
             this.printButton = new System.Windows.Forms.Button();
             this.printDialog = new System.Windows.Forms.PrintDialog();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel_Afiliado.SuspendLayout();
             this.menu.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -736,6 +736,17 @@ namespace Femecon_2_0
             this.flowLayoutPanel_Ecografia.Name = "flowLayoutPanel_Ecografia";
             this.flowLayoutPanel_Ecografia.Size = new System.Drawing.Size(574, 304);
             this.flowLayoutPanel_Ecografia.TabIndex = 93;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(3, 118);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(201, 17);
+            this.checkBox2.TabIndex = 37;
+            this.checkBox2.Tag = "";
+            this.checkBox2.Text = "Magnificación / Focalización bilateral";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // tabControl_Estudios
             // 
@@ -1611,17 +1622,6 @@ namespace Femecon_2_0
             // printDialog
             // 
             this.printDialog.UseEXDialog = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(3, 118);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(201, 17);
-            this.checkBox2.TabIndex = 37;
-            this.checkBox2.Tag = "";
-            this.checkBox2.Text = "Magnificación / Focalización bilateral";
-            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // Form_principal
             // 
